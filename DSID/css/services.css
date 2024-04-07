@@ -1,0 +1,52 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	border-spacing: 0;
+	box-sizing: border-box;
+}
+
+
+body
+{
+	font-family: -apple-system, BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif;
+
+}
+
+.table
+{
+	width: 100%;
+	
+	height: 100%;
+}
+
+
+
+.table caption
+{
+	color: teal;
+	margin: 5px;
+}
+
+.table table
+{
+	height: 100%
+	width: 50%;
+	margin-left: 25%;
+	border-right: 3px solid teal;
+	border-top: 3px solid teal;
+}
+
+.border
+{
+	border-bottom: 3px solid teal;
+	border-left: 3px solid teal;
+}
+

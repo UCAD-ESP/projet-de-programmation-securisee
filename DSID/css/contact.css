@@ -1,0 +1,121 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	border-spacing: 0;
+	box-sizing: border-box;
+}
+
+
+body
+{
+	
+	font-family: -apple-system, BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif;
+	
+}
+
+.table
+{
+	width: 100%;
+	height: 80%;
+}
+
+.table h2
+{
+	color: teal;
+}
+
+.table table
+{
+
+	width: 70%;
+	margin-left: 15%;
+}
+
+.submit input
+{
+	margin-top: 2px;
+	color: azure;
+	width: 50%;
+	margin-left: 25%;
+	height: 30px;
+	background: teal;
+	border-radius: 100px;
+	border: 1px solid azure;
+	font-size: 16px;
+}
+
+.col
+{
+	height: 200px;
+	border: 1px solid teal;
+}
+
+.col textarea
+{
+	font-size: 20px;
+	height: 100%;
+	width: 100%;
+	outline: none;
+	border: 3px solid teal;
+
+	font-style: italic;
+	background-color: #f0ffff;
+}
+
+.name , .email
+{
+	
+	height: 30px;
+}
+
+.name input, .email input
+{
+	font-size: 15px;
+	height: 100%;
+	width: 100%;
+	outline: none;
+	border-left: 3px solid teal;
+	border-top: 3px solid teal;
+
+	font-style: italic;
+	background-color: #f0ffff;
+}
+
+.email input
+{
+	border-right: 3px solid teal;
+}
+
+.table textarea
+{
+	resize: none;
+	width: 100%;
+	height: 100%;
+}
+
+.info
+{
+	bottom: 0px;
+	width: 100%;
+	height: 20%;
+	display: inline-flex;
+}
+
+.info1, .info2, .info3
+{
+	width: 55%;
+	margin-left: 15%;
+}
+
+.info h2
+{
+	color: teal;
+}

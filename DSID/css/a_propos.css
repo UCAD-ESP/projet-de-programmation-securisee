@@ -1,0 +1,116 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	border-spacing: 0;
+	box-sizing: border-box;
+}
+
+
+.corps
+{
+	font-family: -apple-system, BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	scroll-behavior: auto;
+}
+
+.titre
+{
+	position: relative;
+	margin-top: 10px;
+	height: 330px;
+	width: 50%;
+	margin-left: 25%;
+	border-radius: 30px;
+	border: 2px double teal;
+}
+
+.titre h1
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: teal;
+}
+.titre h2
+{
+	text-decoration: underline;
+	color: #D49D0D;
+}
+
+.h2, ul li a
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	color: #D49D0D;
+	text-decoration: none;
+}
+
+.titre ul li, .titre ul li a
+{
+	text-decoration: none;
+	display: inline;
+	font-weight: bold;
+}
+
+.partie
+{
+	position: relative;
+	margin-top: 40px;
+}
+
+.partie p
+{
+	margin: 30px 70px 0px 70px; 
+	text-align: justify;
+}
+
+.partie ul li
+{
+	margin: 30px 70px 0px 90px; 
+	text-align: justify;
+	margin-left: 80px;
+}
+
+.partie img
+{
+	position: relative;
+	margin-top: 30px;
+}
+
+.partie img#dg
+{
+	width: 300px;
+	height: 300px;
+}
+
+.partie h4
+{
+	position: relative;
+	margin-top: 30px;
+	color: black;
+}
+
+.partie table
+{
+	position: relative;
+	width: 70%;
+	margin-left: 15%;
+	border-right: 3px solid teal;
+	border-top: 3px solid teal;
+}
+
+.td
+{
+	border-bottom: 3px solid teal;
+	border-left: 3px solid teal;
+}
