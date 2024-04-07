@@ -170,11 +170,14 @@ INSERT INTO `fonction` (`Id_fonction`, `Code`, `Nom`) VALUES
 INSERT INTO `personnel` (`Id_personnel`, `Id_bureau`, `Id_fonction`, `Matricule_personnel`, `Date_debut_affectation`, `Date_fin_affectation`, `Nom`, `Prenom`, `Telephone`, `Adresse`, `Email`) VALUES
 (1, 3, 1, 1234, '2024-04-01', '2024-04-10', 'nom 1', 'prenom 1', 778889955, 'address', 'email@email.com'),
 (2, 1, 2, 2345, '2024-04-01', '2024-04-10', 'nom 2', 'prenom 2', 778889966, 'address', 'email@email.com'),
-(3, 4, 3, 3456, '2024-04-01', '2024-04-10', 'nom 3', 'prenom 3', 778889977, 'address', 'email@email.com');
+(3, 4, 3, 3456, '2024-04-01', '2024-04-10', 'nom 3', 'prenom 3', 778889977, 'address', 'email@email.com'),
+(111, 5, 5, 1111, '2024-04-01', '2024-04-10', 'admin', 'admin', 779999977, 'address', 'admin@email.com');
 
 
 
-
+INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Mot_de_passe`) 
+VALUES 
+('111', '2345', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 
 
