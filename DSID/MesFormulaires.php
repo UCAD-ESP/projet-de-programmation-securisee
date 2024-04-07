@@ -41,7 +41,7 @@
 
 
 			<div id="pied">
-				<pre>www.douanes.sn	 	copyright &copy; juillet 2021</pre>
+				<pre>www.douanes.sn	 	copyright &copy; avril 2024</pre>
 			</div>
 
 		</body>
@@ -3072,7 +3072,7 @@
 	  					<option value="deconnexion_admin_form1_2.php?select=1">Ajouter un personnel</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=2">Ajouter un bureau</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=4">Ajouter une demande</option>
+	  					<option value="deconnexion_admin_form1_2.php?select=4">Enregistrer une demande</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=51">Modifier ou Supprimer un stagiaire</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option>
@@ -3165,7 +3165,7 @@
   		
 
   				function select($select) {
-  					$ajout = array('----Choix d\'ajout----' => 0, 'Ajouter un personnel' => 1, 'Ajouter un bureau' => 2, 'Ajouter une fonction' => 3, 'Ajouter une demande' => 4, 'Ajouter un stagiaire' => 5, 'Modifier ou Supprimer un stagiaire' => 51, 'Ajouter un établissement' => 6);
+  					$ajout = array('----Choix d\'ajout----' => 0, 'Ajouter un personnel' => 1, 'Ajouter un bureau' => 2, 'Ajouter une fonction' => 3, 'Enregister une demande' => 4, 'Ajouter un stagiaire' => 5, 'Modifier ou Supprimer un stagiaire' => 51, 'Ajouter un établissement' => 6);
   					$options = '';
   					foreach ($ajout as $a => &$b) {
   						if ($select == $b) {
