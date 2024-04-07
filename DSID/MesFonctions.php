@@ -52,12 +52,10 @@
 
 		function titreValid($s): string {
 
-			
-
 			for ($i = 0; $i < strlen($s); $i++) {
 
 				$char = $s[$i];
-				$string = '&\{}[]()|^ç$¤µ_%¨`=+/:;,?!§?*<>²~#';
+				$string = '&\{}[]()|$¤µ_%=+/:;,?!§?*<>²~#';
 
 			  	for ($j = 0; $j < strlen($string); $j++) { 
 
@@ -73,12 +71,10 @@
 
 		function loginValid($s): string {
 
-			
-
 			for ($i = 0; $i < strlen($s); $i++) {
 
 				$char = $s[$i];
-				$string = '&\{}[]()|^-_ç"µ$¤\'%¨`=+/:;,?!§?*<>²~#';
+				$string = '&\{}[]()|-_"µ$¤\'%=+/:;,?!§?*<>²~#';
 
 			  	for ($j = 0; $j < strlen($string); $j++) { 
 

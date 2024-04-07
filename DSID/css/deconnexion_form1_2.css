@@ -207,7 +207,7 @@ button.solo:hover
 	transform: translate(-50% -50%);
 
 	width: 90%;
-	height: 95%;
+	height: 100%;
 	min-width: 70%;
 
 	margin: 0 auto;
@@ -324,63 +324,7 @@ button.solo:hover
 
 }
 
-.bouton1
-{
-	position: relative;
-	left: 0px;
-	border-radius: 100px;
-	border:none;
-	
 
-	min-width: max-content;
-	min-height: max-content;
-	width: 100%;
-	height: 25px;
-	margin-top: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	text-decoration: none;
-	color: azure;
-	font-size: 18px;
-	font-family: "Cambria";
-	cursor: pointer;
-
-	box-shadow: 0px 2px 0px azure;
-
-	background: #f4c74f;
-	background: -webkit-linear-gradient(to right, #D49D0D, #f4c74f);
-	background: linear-gradient(to right, #D49D0D, #f4c74f);
-}
-.bouton1:hover
-{
-	position: relative;
-	left: 0px;
-	border-radius: 100px;
-	border:none;
-	
-
-	min-width: max-content;
-	min-height: max-content;
-	width: 100%;
-	height: 28px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	text-decoration: none;
-	color: black;
-	font-size: 18px;
-	font-family: "Cambria";
-	cursor: pointer;
-
-	box-shadow: 0px 2px 0px black;
-
-	background: #D49D0D;
-	background: -webkit-linear-gradient(to right, #f4c74f, #D49D0D);
-	background: linear-gradient(to right, #f4c74f, #D49D0D);
-}
 
 
 .input-group label
@@ -513,7 +457,7 @@ span
 	box-sizing: border-box;
 	text-align: center;
 	z-index: inherit;
-	top: 110%;
+	top: 130%;
 	transform: translate(-50% -50%);
 
 	width: 100%;
@@ -529,18 +473,18 @@ span
 	border-bottom: 1px solid #D49D0D;
 }
 
-.th
+.th	
 {
 	color: #D49D0D;
-	width: 25%;
+
 	max-width: 200px;
 	table-layout: fixed;
 	padding: 5px;
 	word-wrap: break-word;
 	overflow: hidden;
+	border-bottom: 1px solid #D49D0D;
 }
-
-.td
+.td	
 {
 	color: #787d34;
 	max-width: 200px;
@@ -548,5 +492,5 @@ span
 	padding: 5px;
 	word-wrap: break-word;
 	overflow: hidden;
-
+	border-bottom: 1px solid #D49D0D;
 }

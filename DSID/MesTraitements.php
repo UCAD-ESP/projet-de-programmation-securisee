@@ -4,8 +4,7 @@
 	
 	function connexion() {
 
-		// session_start();
-		// require('MesFormulaires.php');
+	
 	
 		$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
 
@@ -16,12 +15,44 @@
 
 			if (!empty($_REQUEST['Login']) && !empty($_REQUEST['Mot_de_passe'])) {
 
-				$Login_defaut = "admin";
-				$Password_defaut = "admin";
+				$conn = mysqli_connect("127.0.0.1", "root", "", "gestion_de_stage");
+				if (!$conn) { ?>
+
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-danger">
+									<h1 class="py-3 text-center">Erreur !</h1>
+									<h4 style="text-align: center;">Une erreur est survenue dans la base de données!<a href="deconnexion.php" style="position: relative; left: 35px; color: brown">X</a></h4>
+								</div>
+							</div>
+						</div>
+					</div>					
+
+					<?php
+					exit;
+				}
+
+				$req = "SELECT * FROM administrateur";
+				$result = mysqli_query($conn, $req);
+				
+
+				while($row=mysqli_fetch_assoc($result))
+				{
+					$Login_defaut = $row['Login'];
+					$Password_defaut = $row['Mot_de_passe'];
+
+				}
+				mysqli_close($conn);
+
+
+
+				
 
 				$Login = htmlspecialchars($_REQUEST['Login']);
 
-				if ($Login == $Login_defaut && $Mot_de_passe == $Password_defaut) {
+				if ($Login == $Login_defaut && (sha1($Mot_de_passe) == $Password_defaut || $Mot_de_passe == $Password_defaut)) {
 
 	
 

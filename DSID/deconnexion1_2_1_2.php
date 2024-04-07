@@ -9,6 +9,7 @@
 		$Id_utilisateur = $_SESSION['Id_utilisateur'];
 		$Matricule = $_SESSION['Matricule_personnel'];
 		$Log = $_SESSION['Login'];
+		$code1 = 1;
 
 		$Login = htmlspecialchars($_REQUEST['Login']);
 		$Matricule_personnel = htmlspecialchars($_REQUEST['Matricule_personnel']);
@@ -18,14 +19,12 @@
 
 			$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
 
-			$suppression = $bdd->prepare('DELETE FROM utilisateur WHERE Id_utilisateur = ? AND Matricule_personnel = ?');
-			$suppression->execute(array($Id_utilisateur, $Matricule_personnel));
 
 			$recupSup = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ? AND Matricule_personnel = ?');
 			$recupSup->execute(array($Id_utilisateur, $Matricule_personnel));
 			
 			
-			if ($recupSup->rowCount() <= 0) {
+			if ($recupSup->rowCount() > 0) {
 
 						
 					?>
@@ -37,7 +36,7 @@
 							<div class="col-md-7">
 								<div class="alert alert-success">
 									<h1 class="py-3 text-center">Confirmation :</h1>
-									<h4 style="text-align: center;">Votre compte va être supprimé!<br><br>Cliquez ici pour Confirmer<a href="deconnexion.php" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2_1_2.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
+									<h4 style="text-align: center;">Votre compte va être supprimé!<br><br>Cliquez ici pour Confirmer<a href="Suppression.php?Id_utilisateur=<?=$Id_utilisateur;?>&Matricule_personnel=<?=$Matricule_personnel;?>&code1=<?=$code1;?>" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2_1_2.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
 								</div>
 							</div>
 						</div>

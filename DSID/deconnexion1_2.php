@@ -5,7 +5,7 @@
 		require('MesFonctions.php');
 
 		if (isset($_REQUEST['Id_planning'])) {
-			$Id_planning = $_REQUEST['Id_planning'];
+			$Id_planning = htmlspecialchars($_REQUEST['Id_planning']);
 		}
 
 
@@ -109,8 +109,7 @@
 				</div>
 			</div>
 			<?php
-			require('MesFormulaires.php');
-			deconnexion_form1_3_2();
+	
 		
 		} else if (deltaDate($first, $last) == 'false') { 
 
@@ -127,12 +126,12 @@
 				</div>
 			</div>
 			<?php
-			require('MesFormulaires.php');
-			deconnexion_form1_2();
+	
 
 		} else { 
 
 				$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
+
 				$Date_debut = date('Y-m-d H:i', strtotime("$Date_debut $first"));
 				$Date_fin = date('Y-m-d H:i', strtotime("$Date_fin $last"));
 
@@ -142,16 +141,12 @@
 				if ($recupTest->rowCount() > 0) {
 
 					
-
-					$UpdateDate = $bdd->prepare('UPDATE planning SET Titre = ?, Tache = ?, Date_debut = ?, Date_fin = ? WHERE Id_planning = ?');
-					$UpdateDate->execute(array($titre, $tache, $Date_debut, $Date_fin, $Id_planning));
-
-					$recupDate = $bdd->prepare('SELECT * FROM planning WHERE Id_planning = ? AND Matricule_personnel = ? AND Titre = ? AND Tache = ? AND Date_debut = ?');
-					$recupDate->execute(array($Id_planning, $Matricule_personnel, $titre, $tache, $Date_debut));
+					$recupDate = $bdd->prepare('SELECT * FROM planning WHERE Id_planning = ? ');
+					$recupDate->execute(array($Id_planning));
 
 					if ($recupDate->rowCount() > 0) {
 
-						$_SESSION['Id_planning'] = $recupDate->fetch()['Id_planning']; /* Recuperer uniquement l'id parmis les éléments du "fetch"*/
+						// $_SESSION['Id_planning'] = $recupDate->fetch()['Id_planning']; /* Recuperer uniquement l'id parmis les éléments du "fetch"*/
 						// $_SESSION['Matricule_personnel'] = $_REQUEST['Matricule_personnel'];
 						?>
 						<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
@@ -160,8 +155,8 @@
 							<div class="row py-3 justify-content-center">
 								<div class="col-md-7">
 									<div class="alert alert-success">
-										<h1 class="py-3 text-center">Succès !</h1>
-										<h4 style="text-align: center;">Vos informations ont bien été modifiées!<a href="deconnexion_form1_2.php" style="position: relative; left: 45px; color: green">X</a></h4>
+										<h1 class="py-3 text-center">Confirmation :</h1>
+										<h4 style="text-align: center;">Vos informations vont être modifiés!<br><br>Cliquez ici pour Confirmer<a href="Modification.php?titre=<?=$titre;?>&tache=<?=$tache;?>&Date_debut=<?=$Date_debut;?>&Date_fin=<?=$Date_fin;?>&Id_planning=<?=$Id_planning;?>&Matricule_personnel=<?=$Matricule_personnel;?>" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
 									</div>
 								</div>
 							</div>
@@ -212,10 +207,6 @@
 						</div>
 						<?php
 
-						require('MesFormulaires.php');
-						deconnexion_form1_2();
-						
-						//header('Location: deconnexion_form1_2.php');
 
 					} else { ?>
 						<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
@@ -231,8 +222,7 @@
 						</div>
 						<?php
 
-						require('MesFormulaires.php');
-						deconnexion_form1_2();
+
 					}
 
 				}

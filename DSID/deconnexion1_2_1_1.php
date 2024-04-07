@@ -38,17 +38,15 @@
 			} else {
 				$Mot_de_passe = sha1($Mot_de_passe);
 				$Mot_de_passe1 = sha1($Mot_de_passe1);
-
-				$insertUser = $bdd->prepare('UPDATE utilisateur SET Login = ? WHERE Id_utilisateur = ? AND Matricule_personnel = ?');
-				$insertUser->execute(array($Login, $Id_utilisateur, $Matricule_personnel));
-
-				$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ? AND Login = ?');
-				$recupLogin->execute(array($Id_utilisateur, $Login));
+				$code1 = 1;
 
 
-				$_SESSION['Login'] = $recupLogin->fetch()['Login'];
-				
-				
+				$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ?');
+				$recupLogin->execute(array($Id_utilisateur));
+
+
+		
+		
 				if ($recupLogin->rowCount() > 0) {
 
 						
@@ -59,8 +57,8 @@
 						<div class="row py-3 justify-content-center">
 							<div class="col-md-7">
 								<div class="alert alert-success">
-									<h1 class="py-3 text-center">Succès !</h1>
-									<h4 style="text-align: center;">Votre login a été modifié!<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; color: green">X</a></h4>
+									<h1 class="py-3 text-center">Confirmation :</h1>
+									<h4 style="text-align: center;">Votre votre login va être modifié!<br><br>Cliquez ici pour Confirmer<a href="Modification.php?Id_utilisateur=<?=$Id_utilisateur;?>&Matricule_personnel=<?=$Matricule_personnel;?>&code1=<?=$code1;?>&Login=<?=$Login;?>" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
 								</div>
 							</div>
 						</div>
@@ -75,7 +73,7 @@
 							<div class="col-md-7">
 								<div class="alert alert-danger">
 									<h1 class="py-3 text-center">Erreur !</h1>
-									<h4 style="text-align: center;">Une erreur est survenue!<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; color: green">X</a></h4>
+									<h4 style="text-align: center;">Une erreur est survenue!<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; color: brown">X</a></h4>
 								</div>
 							</div>
 						</div>
@@ -166,14 +164,13 @@
 
 				$Mot_de_passe = sha1($Mot_de_passe);
 				$Mot_de_passe1 = sha1($Mot_de_passe1);
+				$code2 = 2;
 
 				$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
 
-				$insertUser = $bdd->prepare('UPDATE utilisateur SET Mot_de_passe = ? WHERE Id_utilisateur = ? AND Matricule_personnel = ?');
-				$insertUser->execute(array($Mot_de_passe, $Id_utilisateur, $Matricule_personnel));
 
-				$recupPassword = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ? AND Mot_de_passe = ?');
-				$recupPassword->execute(array($Id_utilisateur, $Mot_de_passe));
+				$recupPassword = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ?');
+				$recupPassword->execute(array($Id_utilisateur));
 
 				
 				if ($recupPassword->rowCount() > 0) {
@@ -187,8 +184,8 @@
 						<div class="row py-3 justify-content-center">
 							<div class="col-md-7">
 								<div class="alert alert-success">
-									<h1 class="py-3 text-center">Succès !</h1>
-									<h4 style="text-align: center;">Votre mot de passe a été modifié!<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; color: green">X</a></h4>
+									<h1 class="py-3 text-center">Confirmation :</h1>
+									<h4 style="text-align: center;">Votre mot de passe va être modifié!<br><br>Cliquez ici pour Confirmer<a href="Modification.php?Id_utilisateur=<?=$Id_utilisateur;?>&Matricule_personnel=<?=$Matricule_personnel;?>&Mot_de_passe=<?=$Mot_de_passe;?>&code2=<?=$code2;?>" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
 								</div>
 							</div>
 						</div>
@@ -235,23 +232,19 @@
 				} else {
 					$Mot_de_passe = sha1($Mot_de_passe);
 					$Mot_de_passe1 = sha1($Mot_de_passe1);
+					$code3 = 3;
 
 					$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
 
-					$insertUser = $bdd->prepare('UPDATE utilisateur SET Login = ?, Mot_de_passe = ? WHERE Id_utilisateur = ? AND Matricule_personnel = ?');
-					$insertUser->execute(array($Login, $Mot_de_passe, $Id_utilisateur, $Matricule_personnel));
 
-					$recupPassword = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ? AND Mot_de_passe = ?');
-					$recupPassword->execute(array($Id_utilisateur, $Mot_de_passe));
+					$recupPassword = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ?');
+					$recupPassword->execute(array($Id_utilisateur));
 
-					$_SESSION['Mot_de_passe'] = $recupPassword->fetch()['Mot_de_passe'];
+					$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ?');
+					$recupLogin->execute(array($Id_utilisateur));
 
-					$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Id_utilisateur = ? AND Login = ?');
-					$recupLogin->execute(array($Id_utilisateur, $Login));
 
-					$_SESSION['Login'] = $recupLogin->fetch()['Login'];
-					
-					
+										
 					if ($recupPassword->rowCount() > 0 && $recupLogin->rowCount() > 0) {
 
 							
@@ -262,8 +255,8 @@
 							<div class="row py-3 justify-content-center">
 								<div class="col-md-7">
 									<div class="alert alert-success">
-										<h1 class="py-3 text-center">Succès !</h1>
-										<h4 style="text-align: center;">Votre login et mot de passe ont été modifiés!<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; color: green">X</a></h4>
+										<h1 class="py-3 text-center">Confirmation :</h1>
+										<h4 style="text-align: center;">Votre login et mot de passe vont être modifiés!<br><br>Cliquez ici pour Confirmer<a href="Modification.php?Id_utilisateur=<?=$Id_utilisateur;?>&Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe;?>&code3=<?=$code3;?>" style="position: relative; left: 45px; background-color: green; border: 2px solid green; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Confirmer</a> <br><br>Cliquez ici pour Annler<a href="deconnexion_form1_2_1_1.php" style="position: relative; left: 45px; background-color: red; border-radius: 20px;text-decoration: none;color: #d1e7dd; padding: 5px">Annuler</a></h4>
 									</div>
 								</div>
 							</div>

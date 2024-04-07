@@ -107,7 +107,7 @@ a button:hover
 
 .menu-nav #bas
 {
-	margin-top: 80px;
+	margin-top: 140px;
 }
 
 .menu-nav #haut
@@ -141,3 +141,67 @@ a button:hover
 	color: azure;
 }
 
+.form1
+{
+	position: relative;
+	z-index: inherit;
+	top: 10px;
+	transform: translate(-50% -50%);
+
+	width: 40%;
+	height: 10%;
+	min-width: 50%;
+
+	margin: 0 auto;
+
+	background-color: beige;
+	box-shadow: 7px 4px 19px -2px #D49D0D;
+
+}
+
+.select1 {
+   -webkit-appearance:none;
+   -moz-appearance:none;
+   -ms-appearance:none;
+   appearance:none;
+   outline:0;
+   box-shadow:none;
+   border:0!important;
+   background: beige;
+   background-image: none;
+   flex: 1;
+   padding: 0 .5em;
+   color:#D49D0D;
+   cursor:pointer;
+   font-size: 20px;
+   font-weight: bold;
+   text-align-last:center;
+
+}
+select::-ms-expand {
+   display: none;
+}
+.select {
+   position: relative;
+   display: flex;
+   width: 100%;
+   height: 100%;
+   line-height: 3;
+   background: beige;
+   overflow: hidden;
+   border-radius: .25em;
+}
+.select::after {
+   content: '\25BC';
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 0 1em;
+   background: #D49D0D;
+   cursor:pointer;
+   pointer-events:none;
+   transition:.25s all ease;
+}
+.select:hover::after {
+   color: #787d34;
+}
