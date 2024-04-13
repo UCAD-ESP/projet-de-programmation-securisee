@@ -2783,18 +2783,18 @@
 	  					<option value="deconnexion_admin_form1_2.php?select=2">Ajouter un bureau</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option> -->
 	  					<option value="deconnexion_admin_form1_2.php?select=4">Enregistrer une demande</option>
-	  					<!-- <option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
+	  					<option value="deconnexion_admin_form1_2.php?select=5">Affecter une demande</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=51">Modifier ou Supprimer un stagiaire</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option> -->
+	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option>
 
-	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
+	  					<option value="deconnexion_admin_form1_1.php">---------------------------</option>
 
-	  					<!-- <option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option>
-	  					<option value="deconnexion_admin_form1_3.php?select=2">Consulter les bureaux</option>
-	  					<option value="deconnexion_admin_form1_3.php?select=3">Consulter les fonctions</option>
+	  					<!-- <option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option> -->
+	  					<!-- <option value="deconnexion_admin_form1_3.php?select=2">Consulter les bureaux</option> -->
+	  					<!-- <option value="deconnexion_admin_form1_3.php?select=3">Consulter les fonctions</option> -->
 	  					<option value="deconnexion_admin_form1_3.php?select=4">Consulter les demandes</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=51">Consulter les stagiaires</option>
-	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option> -->
+	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option>
 
 	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
 
@@ -2874,19 +2874,33 @@
   				
   		
 
-  				function select($select) {
-  					$ajout = array('----Choix d\'ajout----' => 0, 'Ajouter un personnel' => 1, 'Ajouter un bureau' => 2, 'Ajouter une fonction' => 3, 'Enregister une demande' => 4, 'Ajouter un stagiaire' => 5, 'Modifier ou Supprimer un stagiaire' => 51, 'Ajouter un établissement' => 6);
-  					$options = '';
-  					foreach ($ajout as $a => &$b) {
-  						if ($select == $b) {
-  							$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
-  						} else {
-  							$options .= '<option value="'.$b.'" >'.$a.'</option>';
-  						}
+  				// function select($select) {
+  				// 	$ajout = array('----Choix d\'ajout----' => 0, 'Ajouter un personnel' => 1, 'Ajouter un bureau' => 2, 'Ajouter une fonction' => 3, 'Enregister une demande' => 4, 'Ajouter un stagiaire' => 5, 'Modifier ou Supprimer un stagiaire' => 51, 'Ajouter un établissement' => 6);
+  				// 	$options = '';
+  				// 	foreach ($ajout as $a => &$b) {
+  				// 		if ($select == $b) {
+  				// 			$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
+  				// 		} else {
+  				// 			$options .= '<option value="'.$b.'" >'.$a.'</option>';
+  				// 		}
 
-  					}
-  					return $options;
-  				}
+  				// 	}
+  				// 	return $options;
+  				// }
+
+				function select($select) {
+					$ajout = array('Enregister une demande' => 4, 'Affecter une demande' => 5, 'Modifier ou Supprimer un stagiaire' => 51, 'Ajouter un établissement' => 6);
+					$options = '';
+					foreach ($ajout as $a => &$b) {
+						if ($select == $b) {
+							$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
+						} else {
+							$options .= '<option value="'.$b.'" >'.$a.'</option>';
+						}
+
+					}
+					return $options;
+				}
 
   			
 
@@ -5793,21 +5807,37 @@
   				
   			
 
-  				function select($select) {
-  					$ajout = array('----Choix de consultation----' => 0, 'Consulter les personnels' => 1, 'Consulter les bureaux' => 2, 'Consulter les fonctions' => 3, 'Consulter les demandes' => 4, 'Consulter les stagiaires' => 51, 'Consulter les établissements' => 6);
-  					$options = '';
+  				// function select($select) {
+  				// 	$ajout = array('----Choix de consultation----' => 0, 'Consulter les personnels' => 1, 'Consulter les bureaux' => 2, 'Consulter les fonctions' => 3, 'Consulter les demandes' => 4, 'Consulter les stagiaires' => 51, 'Consulter les établissements' => 6);
+  				// 	$options = '';
 
-  					foreach ($ajout as $a => &$b) {
+  				// 	foreach ($ajout as $a => &$b) {
 
-  						if ($select == $b) {
-  							$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
-  						} else {
-  							$options .= '<option value="'.$b.'" >'.$a.'</option>';
-  						}
+  				// 		if ($select == $b) {
+  				// 			$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
+  				// 		} else {
+  				// 			$options .= '<option value="'.$b.'" >'.$a.'</option>';
+  				// 		}
 
-  					}
-  					return $options;
-  				}
+  				// 	}
+  				// 	return $options;
+  				// }
+
+				  function select($select) {
+					$ajout = array('Consulter les demandes' => 4, 'Consulter les stagiaires' => 51, 'Consulter les établissements' => 6);
+					$options = '';
+
+					foreach ($ajout as $a => &$b) {
+
+						if ($select == $b) {
+							$options .= '<option value="'.$b.'" selected>'.$a.'</option>';
+						} else {
+							$options .= '<option value="'.$b.'" >'.$a.'</option>';
+						}
+
+					}
+					return $options;
+				}
 
   			?>
 
