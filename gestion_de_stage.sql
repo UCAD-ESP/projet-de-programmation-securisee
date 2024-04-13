@@ -14,6 +14,21 @@ CREATE DATABASE gestion_de_stage;
 
 USE gestion_de_stage;
 
+
+CREATE TABLE utilisateur(
+	Id_utilisateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	Matricule_personnel int(2),
+	Login varchar(50),
+	Mot_de_passe varchar(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE administrateur(
+	Id_administrateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	Login varchar(50),
+	Mot_de_passe varchar(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE etablissement(
 	Id_etablissement int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Nom varchar(50),
@@ -26,29 +41,6 @@ CREATE TABLE etablissement(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE demande(
-	Id_demande int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	Id_etablissement int(2),
-	Niveau varchar(50),
-	Domaine varchar(50),
-	Nom_demandeur varchar(50),
-	Prenom_demandeur varchar(50),
-	Adresse varchar(50),
-	Date_naissance date,
-	Lieu_naissance varchar(50),
-	Telephone int(2),
-	Email varchar(50),
-	Decision ENUM('Accepter', 'Attente', 'Rejeter'),
-	-- CONSTRAINT `fk_address_city` FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE RESTRICT ON UPDATE CASCADE
-	CONSTRAINT fk_etablissement_demande FOREIGN KEY(Id_etablissement) REFERENCES etablissement(Id_etablissement) ON DELETE SET NULL ON UPDATE CASCADE
-	-- CREATE TABLE shirts (
- --    name VARCHAR(40),
- --    size ENUM('x-small', 'small', 'medium', 'large', 'x-large')
-	-- );
-	-- INSERT INTO shirts (name, size) VALUES ('dress shirt','large'), ('t-shirt','medium'),
-	--   ('polo shirt','small');
-	-- SELECT name, size FROM shirts WHERE size = 'medium';
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE fonction(
@@ -81,6 +73,36 @@ CREATE TABLE personnel(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+CREATE TABLE demande(
+	Id_demande int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	Id_etablissement int(2),
+	Id_utilisateur int(2),
+	Niveau varchar(50),
+	Domaine varchar(50),
+	Nom_demandeur varchar(50),
+	Prenom_demandeur varchar(50),
+	Adresse varchar(50),
+	Date_naissance date,
+	Lieu_naissance varchar(50),
+	Telephone int(2),
+	Email varchar(50),
+	Decision ENUM('Accepter', 'Attente', 'Rejeter'),
+	-- CONSTRAINT `fk_address_city` FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT fk_etablissement_demande FOREIGN KEY(Id_etablissement) REFERENCES etablissement(Id_etablissement) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT fk_utilisateur_demande FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur) ON DELETE SET NULL ON UPDATE CASCADE
+	-- CREATE TABLE shirts (
+ --    name VARCHAR(40),
+ --    size ENUM('x-small', 'small', 'medium', 'large', 'x-large')
+	-- );
+	-- INSERT INTO shirts (name, size) VALUES ('dress shirt','large'), ('t-shirt','medium'),
+	--   ('polo shirt','small');
+	-- SELECT name, size FROM shirts WHERE size = 'medium';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
 CREATE TABLE stage(
 	Id_stage int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Id_demande int(2),
@@ -111,18 +133,7 @@ CREATE TABLE stage(
 
 
 
-CREATE TABLE utilisateur(
-	Id_utilisateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	Matricule_personnel int(2),
-	Login varchar(50),
-	Mot_de_passe varchar(50)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE administrateur(
-	Id_administrateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	Login varchar(50),
-	Mot_de_passe varchar(50)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO administrateur (Login, Mot_de_passe) VALUES 
 	('admin', 'admin');
@@ -172,9 +183,9 @@ INSERT INTO `personnel` (`Id_personnel`, `Id_bureau`, `Id_fonction`, `Matricule_
 (2, 1, 2, 2345, '2024-04-01', '2024-04-10', 'nom 2', 'prenom 2', 778889966, 'address', 'email@email.com'),
 (3, 4, 3, 3456, '2024-04-01', '2024-04-10', 'nom 3', 'prenom 3', 778889977, 'address', 'email@email.com');
 
-
-
-
+INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Mot_de_passe`) 
+VALUES 
+('111', '2345', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 
 
