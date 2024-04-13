@@ -19,14 +19,15 @@ CREATE TABLE utilisateur(
 	Id_utilisateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Matricule_personnel int(2),
 	Login varchar(50),
+	Role varchar(20),
 	Mot_de_passe varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE administrateur(
-	Id_administrateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	Login varchar(50),
-	Mot_de_passe varchar(50)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE administrateur(
+-- 	Id_administrateur int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+-- 	Login varchar(50),
+-- 	Mot_de_passe varchar(50)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE etablissement(
@@ -135,8 +136,8 @@ CREATE TABLE stage(
 
 
 
-INSERT INTO administrateur (Login, Mot_de_passe) VALUES 
-	('admin', 'admin');
+-- INSERT INTO administrateur (Login, Mot_de_passe) VALUES 
+-- 	('admin', 'admin');
 
 
 
@@ -183,11 +184,14 @@ INSERT INTO `personnel` (`Id_personnel`, `Id_bureau`, `Id_fonction`, `Matricule_
 (2, 1, 2, 2345, '2024-04-01', '2024-04-10', 'nom 2', 'prenom 2', 778889966, 'address', 'email@email.com'),
 (3, 4, 3, 3456, '2024-04-01', '2024-04-10', 'nom 3', 'prenom 3', 778889977, 'address', 'email@email.com');
 
-INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Mot_de_passe`) 
+INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Role`, `Mot_de_passe`) 
 VALUES 
-('111', '2345', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
+('111', '2345', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
+('112', '1234', 'pepere', 'admin', '34ce8a09f4fed870b2c02a213f3d443b6e8fc852');
 
 
+
+INSERT INTO `etablissement` (`Id_etablissement`, `Nom`, `Telephone`, `Email`, `Adresse`, `BP`, `Ville`, `Pays`) VALUES ('1', 'ESP', '338001122', 'esp@email.com', 'Fann', 'bp 5522', 'Dakar', 'Senegal');
 
 -- CREATE TABLE Matiere (
 -- 	reference int NOT NULL,

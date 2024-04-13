@@ -1599,24 +1599,14 @@
 
 					<br>
 
-
 						<form action="rechercher.php" method="REQUEST" class="form_r3">			      	
-
-			        		        <div>
-				     			     
-					     			    <input type="text" name="rechercher" placeholder="Rechercher ici" required="" id="validationCustomRecherche">
-					     			    <input type="submit" name="valider_stage1" value="envoyer" id="validationCustomBtn">
-
-				                    </div>
-
+							<div>
+								<input type="text" name="rechercher" placeholder="Rechercher ici" required="" id="validationCustomRecherche">
+								<input type="submit" name="valider_stage1" value="envoyer" id="validationCustomBtn">
+							</div>
 				       	 </form>
 				
 			
-
-							
-								
-				
-
 					<?php
 
 						$conn = mysqli_connect("127.0.0.1", "root", "", "gestion_de_stage");
@@ -2720,6 +2710,13 @@
 		 	header('Location: connexion_form.php');
 		}
 
+		if(isset($_SESSION['Id_utilisateur'])) {
+			$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// echo "________________________________________________________________________ $Id_utilisateur";
+		}
+
+
+
 		?>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2737,6 +2734,11 @@
 			if (!$_SESSION['Mot_de_passe_admin']) { // Si la session password n'est pas actif sur le site
 			 	header('Location: connexion_form.php');
 			}
+
+			// if(isset($_SESSION['Id_utilisateur'])) {
+			// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// 	// echo "________________________________________________________________________ $Id_utilisateur";
+			// }
 			?>
 
 			<meta charset="utf-8">
@@ -2777,26 +2779,26 @@
 	  				<select class="select1" name="select" onChange="location = this.options[this.selectedIndex].value;">
 
 	  					<option value="deconnexion_admin_form1_1.php">----Choix----</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=1">Ajouter un personnel</option>
+	  					<!-- <option value="deconnexion_admin_form1_2.php?select=1">Ajouter un personnel</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=2">Ajouter un bureau</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option>
+	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option> -->
 	  					<option value="deconnexion_admin_form1_2.php?select=4">Enregistrer une demande</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
+	  					<!-- <option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=51">Modifier ou Supprimer un stagiaire</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option>
+	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option> -->
 
-	  					<option value="deconnexion_admin_form1_1.php">---------------------------</option>
+	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
 
-	  					<option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option>
+	  					<!-- <option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=2">Consulter les bureaux</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=3">Consulter les fonctions</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=4">Consulter les demandes</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=51">Consulter les stagiaires</option>
-	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option>
+	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option> -->
 
-	  					<option value="deconnexion_admin_form1_1.php">---------------------------</option>
+	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
 
-	  					<option value="deconnexion_admin_form1_6.php">Changer les coordonnées du compte</option>
+	  					<!-- <option value="deconnexion_admin_form1_6.php">Changer les coordonnées du compte</option> -->
 
 
 						
@@ -3139,10 +3141,8 @@
 														while($row=mysqli_fetch_assoc($result))
 														{?>
 													
-
 																<option value="<?=$row['Nom'];?>"<?=$row['Nom'] == ($_REQUEST['selectBureau']??'') ? ' selected="selected"' : '';?>><?=$row['Nom'];?></option>
 
-														
 															<?php
 														}
 														mysqli_close($conn);
@@ -3853,8 +3853,15 @@
 
 							<form class="needs-validation" novalidate method="REQUEST" action="select.php">
 
+							<?php
+								// if(isset($_SESSION['Id_utilisateur'])) {
+								// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+								// 	echo "________________________________________________________________________ $Id_utilisateur";
+								// }
+							?>
 								<input type="number" hidden="" name="Id_demande" value="<?= isset($_REQUEST['Id_demande'])?$_REQUEST['Id_demande']:'';?>">
 								<input type="number" hidden="" name="Id_etablissement" value="<?= isset($_REQUEST['Id_etablissement'])?$_REQUEST['Id_etablissement']:'';?>">
+								<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 								
 
 									<div class="row">

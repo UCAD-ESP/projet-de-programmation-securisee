@@ -871,12 +871,28 @@
 
 		require('MesFonctions.php');
 
+		// if(isset($_SESSION['Id_utilisateur'])) {
+		// 	// Récupère l'ID de l'utilisateur depuis la session
+		// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+		
+		// 	echo $Id_utilisateur;
+		// 	// Utilisez $id_utilisateur comme vous le souhaitez
+		// 	// Par exemple, pour l'afficher :
+		// 	// echo "L'ID de l'utilisateur est : " . $id_utilisateur;
+		// } else {
+		// 	// Si l'ID de l'utilisateur n'est pas défini dans la session
+		// 	echo "ID utilisateur non trouvé dans la session.";
+		// }
+
 
 		if (isset($_REQUEST['Id_demande'])) {
 			$Id_demande = htmlspecialchars($_REQUEST['Id_demande']);
 		}
 		if (isset($_REQUEST['Id_etablissement'])) {
 			$Id_etablissement = htmlspecialchars($_REQUEST['Id_etablissement']);
+		}
+		if (isset($_REQUEST['Id_utilisateur'])) {
+			$Id_utilisateur = htmlspecialchars($_REQUEST['Id_utilisateur']);
 		}
 
 		$NomD = $_REQUEST['NomD'];
@@ -1116,11 +1132,13 @@
 
 				if (!$recupDemande->rowCount() > 0 && $recupEtablissement->rowCount() > 0) {
 
-					$insertDemande = $bdd->prepare('INSERT INTO demande (Id_etablissement, Niveau, Domaine, Nom_demandeur, Prenom_demandeur, Adresse, Date_naissance, Lieu_naissance, Telephone, Email, Decision) VALUES (?,?,?,?,?,?,?,?,?,?,?)');
-					$insertDemande->execute(array($Id_etablissement, $Niveau, $Domaine, $NomD, $PrenomD, $AdresseD, $dateN, $Lieu, $TelephoneD, $EmailD, $selectDecision));
+					// $Id_utilisateur = intval($Id_utilisateur);
 
-					$recupDemande = $bdd->prepare('SELECT * FROM demande WHERE Id_etablissement = ? AND Niveau = ? AND Domaine = ? AND Nom_demandeur = ? AND Prenom_demandeur = ? AND Adresse = ? AND Date_naissance = ? AND Lieu_naissance = ? AND Telephone = ? AND Email = ? AND Decision = ?');
-					$recupDemande->execute(array($Id_etablissement, $Niveau, $Domaine, $NomD, $PrenomD, $AdresseD, $dateN, $Lieu, $TelephoneD, $EmailD, $selectDecision));
+					$insertDemande = $bdd->prepare('INSERT INTO demande (Id_etablissement, Id_utilisateur, Niveau, Domaine, Nom_demandeur, Prenom_demandeur, Adresse, Date_naissance, Lieu_naissance, Telephone, Email, Decision) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)');
+					$insertDemande->execute(array($Id_etablissement, $Id_utilisateur, $Niveau, $Domaine, $NomD, $PrenomD, $AdresseD, $dateN, $Lieu, $TelephoneD, $EmailD, $selectDecision));
+
+					$recupDemande = $bdd->prepare('SELECT * FROM demande WHERE Id_etablissement = ? AND Id_utilisateur = ? AND Niveau = ? AND Domaine = ? AND Nom_demandeur = ? AND Prenom_demandeur = ? AND Adresse = ? AND Date_naissance = ? AND Lieu_naissance = ? AND Telephone = ? AND Email = ? AND Decision = ?');
+					$recupDemande->execute(array($Id_etablissement, $Id_utilisateur, $Niveau, $Domaine, $NomD, $PrenomD, $AdresseD, $dateN, $Lieu, $TelephoneD, $EmailD, $selectDecision));
 
 					$Id_demande = $recupDemande->fetch()['Id_demande'];
 
