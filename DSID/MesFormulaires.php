@@ -17,10 +17,10 @@
 
 			<div id="entete">
 				<div id="logo">
-					<img src="image/logos.jpg">
+					<img src="image/logo.jpg">
 				</div>
 				<div id="titre">
-					<h1>Direction des Systèmes informatiques douaniers</h1>
+					<h1>Projet de programmation sécurisée</h1>
 					<p>Gestion des demandes de stage</p>
 				</div>
 			</div>
@@ -28,20 +28,21 @@
 			<div id="menu">
 				<ul>
 					<li><a href= "deconnexion_form1.php" target="zone">accueil</a></li>
-					<li><a href="a_propos.php" target="zone">à propos</a></li>
+					<!-- <li><a href="a_propos.php" target="zone">à propos</a></li> -->
 					<li><a href="services.php" target="zone">services</a></li>
 					<li><a href="contact.php" target="zone">contact</a></li>
 					
 				</ul>
 			</div>
 
-		
 						<iframe src="deconnexion_form1.php" id="corps" name="zone"></iframe>
-			
-
 
 			<div id="pied">
+<<<<<<< HEAD
 				<pre>www.douanes.sn	 	copyright &copy; avril 2024</pre>
+=======
+				<pre>www.esp.sn	 	copyright &copy; avril 2024</pre>
+>>>>>>> c211e38b4caf1e2db93c311014b1ee59434a92f4
 			</div>
 
 		</body>
@@ -101,18 +102,18 @@
 
 			<div class="info1">
 				<h2>Adresse :</h2>
-				<h5>8-10 allées Robert Delmas BP 4033 Dakar Sénégal</h5>
+				<h5>Université Cheikh Anta Diop, Dakar 10700</h5>
 			</div>
 
 			<div class="info2">
 				<h2>Telephone :</h2>
-				<h5>Telephone : 33 889 74 74</h5>
-				<h5>FAX : 33 889-74-01</h5>
+				<h5>Telephone : 33 800 00 01</h5>
+				<h5>FAX : 33 800-00-00</h5>
 			</div>
 
 			<div class="info3">
 				<h2>E-mail :</h2>
-				<h5>spdgd@douanes.sn</h5>
+				<h5>email@esp.sn</h5>
 			</div>
 			
 		</div>
@@ -140,9 +141,9 @@
 			   </tr>
 			   <tr>
 			   		<th rowspan="13" class="border"><h3>Les fonctionnalités</h3></th>
-			    	<th class="border">Utilisateur</th>
-			    	<th class="border">Personnel</th>
-			    	<th class="border">Bureau Administratif et Financier</th>
+			    	<th class="border">Stagiaire</th>
+			    	<th class="border">Encadrant</th>
+			    	<th class="border">Administrateur</th>
 			   </tr>
 			   <tr>
 			   		
@@ -205,295 +206,6 @@
 			</div>
 			
 			
-		</body>
-
-		<?php
-	}
-
-	function a_propos() {
-
-		?>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/a_propos.css?v=<?php echo time(); ?>">
-		<body>
-
-			<div class="corps">
-
-				<div class="titre">
-
-					<h1 id="plan">A propos de nous</h1>	
-					<h2>Plan :</h2>
-			
-					<ul>	
-						<li><a href="#un" target="zone" class="plan"><h2 class="h2"> I - Organisation des Douanes sénégalaises</h2></a></li>
-						<ul>
-							<li><a href="#unun" target="zone" class="plan"><h3>1 . Organigramme</h3></a></li>
-							<br>
-							<li><a href="#undeux" target="zone" class="plan"><h3>2. CV du DG</h3></a></li>
-						</ul>
-						<li><a href="#deux" target="zone" class="plan"><h2 class="h2"> II - Mission de la Direction Général des Douanes</h2></a></li>
-						<li><a href="#trois" target="zone" class="plan"><h2 class="h2"> III - Répertoire des douane</h2></a></li>
-					</ul>
-					
-				</div>
-
-
-
-
-				<div class="partie">
-					<h2 class="h2" id="un"> I - Organisation</h2>
-
-					<h3>LES NOUVEAUX ATOUTS DE L'ADMINISTRATION DES DOUANES</h3>
-
-					<p>Après avoir contribué d’une manière significative à la mobilisation et la sécurisation des recettes douanières, mais également à la facilitation des procédures, l’arrêté n°8381/MEF/DGD du 25 Août 2000 portant organisation de l’Administration des Douanes a été abrogé et remplacé par l’arrêté n° 7282 du 30 juillet 2009. Des besoins nouveaux apparus dans le domaine organisationnel, ont amené les autorités à apporter des réaménagements au dispositif opérationnel du service des Douanes pour mieux s’adapter au contexte du moment.</p>
-
-					<p>Ces besoins ont été guidés par l’intensification du trafic des marchandises, les nouvelles formes de criminalités, la nécessité de contribuer au rayonnement du Port autonome de Dakar, le renforcement de la représentation de l’Administration des Douanes au niveau régional et la définition d’une politique de gestion optimale des ressources humaines, financières et matérielles. Ainsi pour faire face aux défis actuels et futurs à relever, il est apparu opportun d’asseoir une nouvelle organisation basée autour de :</p>
-
-					<ul>
-						<li>la coordination optimale de l’action du service avec la création d’un poste de coordonnateur auprès du Directeur général;</li>
-						<li>la promotion et le renforcement de la facilitation des procédures et du partenariat avec l’entreprise avec notamment la création d’une Direction chargée de la Facilitation et du Partenariat avec l’Entreprise (DFPE) ; </li>
-						<li>une meilleure maîtrise des ressources humaines, matérielles et financières, ainsi qu’en matière de gestion et de maintenance du matériel et la rationalisation de la surveillance douanière.</li>
-					</ul>
-
-					<p>Voila tracés les nouveaux atouts d’une administration des Douanes du 21ème siècle qui en un mot comme en mille qui devront répondre aux attentes aussi bien de l’Etat que des partenaires et usagers du service public de la Douane.</p>
-
-					<h3 class="h2" id="unun">1 . Organigramme</h3>
-
-					<img src="image/Organigramme.jpg">
-
-					<h3 class="h2" id="undeux">2 . CV du DG</h3>
-
-					<h4>M.Abourahmane DIEYE</h4>
-					<h4>Colonel - Inspecteur Principal des Douanes</h4>
-					<img id="dg" src="image/dg.jpg">
-
-					<h4>Formation</h4>
-					<p><strong>- Septembre 2010 :</strong> Master II en politique et Négociation Commerciales Internationales : UCAD Mention Bien</p>
-					<p>Les résultats escomptés du Master sont, d’une part, la constitution d’une masse critique d’experts en négociations internationales et ; d’autre part, l’adaptation des systèmes commerciaux nationaux aux exigences et obligations du système commercial multilatéral.</p>
-					<p><strong>- Novembre 2003 :</strong> BREVET ENA Ecole Nationale d’Administration / Régie Economique Section Douanes. Mention Bien.</p>
-					<p><strong>-Décembre 2000 :</strong> Maitrise sociologie des organisations UGB Sénégal Mention Très bien.</p>
-					<p><strong>-Juliet 1995:</strong> BAC Lycée Malick Sy Thies / Mention Abien</p>
-
-					<h4>Certifications</h4>
-					<p><strong>-Fevrier 2014 :</strong> OMC E-Learning CERFICAT sur l’Agriculture à l’OMC</p>
-					<p><strong>-Juillet 2006 :</strong> Chef de service Surveillance à l’Ecole Nationale Des Douanes de la Rochelle France</p>
-					<P><strong>- Mars 2004 :</strong> Certificat sur l’Accord sur les aspects des droits de la propriété intellectuelle qui touche au commerce</P>
-					<p><strong>-Avril 2004 :</strong> Certificat sur les méthodologies des contrôles des opérations commerciales à l’Ecole Nationale des Douanes de Tourcoing en France</p>
-					<p><strong>-Aout 2002 :</strong> completion of The African Growth and Opportunity Act Training Worskship</p>
-
-					<h4>Distinctions</h4>
-					<p>-Décoration à la médaille d’honneur  de la Douane Hors Contingent (avant les 15 ans de service requis pour ladite médaille) en Janvier 2016.</p>
-
-					<h4>Expériences Professionnelles</h4>
-					<p><strong>- Juin 2019 : Directeur Régional Ouest des douanes</strong></p>
-					<p>-Novembre 2018 : Conseiller Technique du Ministre de l’Economie et des Finances</p>
-					<p>-Mars 2015 : Chef de Bureau des Douanes de Dakar Port Nord</p>
-					<p><strong>-Fevrier 2012 :</strong> Chef de visite Bureau des Douanes Dakar Port Sud</p>
-					<p><strong>-Mars 2010 :</strong> Chef du Bureau des Douanes de Dakar Yoff</p>
-					<p><strong>-Novembre 2009 :</strong> Chef des Sections Bureau des Douanes de Dakar Port Nord</p>
-					<p><strong>-Septembre 2007 :</strong> Chef des Sections du Bureau des Douanes de Dakar Yoff</p>
-					<p><strong>-Juin 2004 :</strong> Vérificateur Dakar Port Nord</p>
-					<p><strong>-Septembre 2003 :</strong> Inspecteur Stagiaire Direction des Systèmes Informatiques Douaniers</p>
-
-					<h4>Langues</h4>
-					<p><strong>Anglais :</strong> Bon niveau</p>
-					<p><strong>Français :</strong> Très bon niveau</p>
-
-					<h4>CompétencesTI</h4>
-					<p><strong>-Traitement de texte :</strong> connaissances avancées</p>
-					<p><strong>-Feuille de calcul :</strong> connaissances intermédiaires</p>
-					<p><strong>-Présentation :</strong> connaissances intermédiaires</p>
-					<p><strong>-Base de données :</strong> connaissances de base</p>
-
-
-					<h2 class="h2" id="deux"> II - Mission de la Direction Général des Douanes</h2>
-
-					<p><strong>Sous l’autorité du Directeur général, la Direction générale des Douanes est chargée :</strong></p>
-					<p>de la liquidation des droits et taxes exigibles à l’occasion de l’importation ou de l’exportation des produits ou marchandises ;</p>
-				    <p>de la recherche, de la constatation et de la répression de la fraude douanière, ainsi que de la contrefaçon et de la piraterie ;</p>
-				    <p>de la poursuite et de la répression des infractions à la réglementation des changes ;</p>
-				    <p>de la sécurité et de la facilitation de la chaîne logistique internationale ;</p> 
-				    <p>de la formation professionnelle et du perfectionnement des personnels d’encadrement et d’exécution ;</p> 
-				    <p>de l’élaboration, en collaboration avec les services intéressés tant au plan national qu’au sein des instances internationales, de la législation et de la réglementation douanières relatives aux échanges extérieurs et au change.</p>
-				    <p>Elle concourt également à l’application de la réglementation relative, notamment à la sécurité, à la santé publique et à la protection de l’environnement ;</p>
-				    <p>du suivi et du traitement des questions relatives aux relations douanières internationales ;</p>
-				    <p>de l’administration, de l’orientation, de la coordination et du contrôle des directions et services qui la composent ;</p> 
-				    <p>des secrétariats de la Commission de Règlement des Litiges douaniers, du Comité national de Lutte contre la Fraude et du Comité de Direction des Commissionnaires en Douane agréés.</p>
-
-				    <p><strong>Le Directeur général des Douanes est assisté dans ses fonctions par un Coordonnateur, nommé par décret.
-					Le Directeur général des Douanes peut, également, être assisté de Conseillers techniques et de Chargés de missions nommés par arrêté du Ministre chargé des Finances.
-					Outre ses services rattachés, la Direction générale des Douanes comprend :</strong></p>
-
-					<p><strong>1) les services centraux suivants :</strong></p>
-
-				    <p>la Direction du Contrôle interne ;
-				    la Direction de la Réglementation et de la Coopération internationale ;
-				    la Direction des Opérations douanières ;
-				    la Direction de la Facilitation et du Partenariat avec l’Entreprise ;
-				    la Direction du Renseignement et des Enquêtes douanières ;
-				    la Direction du Personnel et de la Logistique ;
-				    la Direction des Systèmes informatiques douaniers.</p>
-
-				    <p><strong>2) les services extérieurs suivants :</strong></p>
-
-				    <p>la Direction régionale de Dakar-Port ;
-				    la Direction régionale des Unités spécialisées et Produits pétroliers ;
-				    la Direction régionale de l’Ouest ;
-				    la Direction régionale du Centre ;
-				    la Direction régionale du Nord ;
-				    la Direction régionale du Sud ;
-				    la Direction régionale du Sud-Est.</p>
-
-
-					<h2 class="h2" id="trois"> III - Répertoire</h2>
-
-					<table>
-						<tr>
-							<th colspan="4" class="td"><h3>Direction Générale des Douanes</h3></th>
-						</tr>
-						<tr>
-							<th class="td">Directions DGD</th>
-							<th class="td">Fixe</th>
-							<th class="td">Cellulaire</th>
-							<th class="td">Adresse</th>
-						</tr>
-						<tr>
-							<td class="td">Standard</td>
-							<td class="td">33 839 00 00</td>
-							<td class="td"></td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Coordinateur</td>
-							<td class="td">33 839 00 05</td>
-							<td class="td">77 332 64 01</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Secrétaire Particulier N°1</td>
-							<td class="td">33 839 00 03</td>
-							<td class="td"></td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Secrétaire Particulier N°2</td>
-							<td class="td">33 839 00 04</td>
-							<td class="td"></td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Bureau des Relations Publiques et de la Communication</td>
-							<td class="td">33 839 00 61</td>
-							<td class="td">77 332 64 02</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Division de l’Orientation et de la Prospective</td>
-							<td class="td">33 839 00 10</td>
-							<td class="td">77 332 64 11</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Division de la Formation</td>
-							<td class="td">33 824 98 11</td>
-							<td class="td">77 332 64 10</td>
-							<td class="td">Point E Boulevard du canal 4 X rue de diourbel PE15</td>
-						</tr>
-						<tr>
-							<td class="td">Direction des Opérations Douanières</td>
-							<td class="td">33 839 00 03</td>
-							<td class="td">77 332 64 05</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Direction du Contrôle Interne</td>
-							<td class="td"></td>
-							<td class="td">77 332 64 03</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Direction de la Réglementation et de la Coopération Internationale</td>
-							<td class="td">33 839 00 43</td>
-							<td class="td">77 332 64 04</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Direction du Personnel et de la Logistique</td>
-							<td class="td">33 839 00 23</td>
-							<td class="td">77 332 64 08</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Direction du Renseignement et des Enquêtes Douanières</td>
-							<td class="td"></td>
-							<td class="td">77 332 64 07</td>
-							<td class="td">Ouakam Extension Mamelles, lots 115/117</td>
-						</tr>
-						<tr>
-							<td class="td">Direction de la Facilitation et du Partenariat avec l’Entreprise</td>
-							<td class="td">33 839 00 23</td>
-							<td class="td">77 332 64 06</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<td class="td">Direction des Systèmes Informatiques Douaniers</td>
-							<td class="td">33 839 00 63</td>
-							<td class="td">77 332 64 09</td>
-							<td class="td">DGD / avenue Peytavin x avenue de la République</td>
-						</tr>
-						<tr>
-							<th colspan="4" class="td"><h3>Directions régionales</h3></th>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale Dakar Port</td>
-							<td class="td"></td>
-							<td class="td">77 332 64 13</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale des Produits Pétroliers et des Unités Spécialisées</td>
-							<td class="td"></td>
-							<td class="td">77 332 64 16</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régional Ouest</td>
-							<td class="td">33 821 88 94</td>
-							<td class="td">77 332 64 15</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale du Centre</td>
-							<td class="td">33 941 46 76</td>
-							<td class="td">77 332 64 17</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale des Douanes du Nord</td>
-							<td class="td">33 961 51 70</td>
-							<td class="td">77 332 64 19</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale des Douanes du Sud</td>
-							<td class="td">33 991 11 27</td>
-							<td class="td">77 332 64 18</td>
-							<td class="td"></td>
-						</tr>
-						<tr>
-							<td class="td">Direction Régionale des Douanes du Sud Est</td>
-							<td class="td">33 981 17 19</td>
-							<td class="td">77 332 64 20</td>
-							<td class="td"></td>
-						</tr>
-					</table>
-
-				</div>
-
-
-			</div>
-
 		</body>
 
 		<?php
@@ -1891,24 +1603,14 @@
 
 					<br>
 
-
 						<form action="rechercher.php" method="REQUEST" class="form_r3">			      	
-
-			        		        <div>
-				     			     
-					     			    <input type="text" name="rechercher" placeholder="Rechercher ici" required="" id="validationCustomRecherche">
-					     			    <input type="submit" name="valider_stage1" value="envoyer" id="validationCustomBtn">
-
-				                    </div>
-
+							<div>
+								<input type="text" name="rechercher" placeholder="Rechercher ici" required="" id="validationCustomRecherche">
+								<input type="submit" name="valider_stage1" value="envoyer" id="validationCustomBtn">
+							</div>
 				       	 </form>
 				
 			
-
-							
-								
-				
-
 					<?php
 
 						$conn = mysqli_connect("127.0.0.1", "root", "", "gestion_de_stage");
@@ -3012,6 +2714,13 @@
 		 	header('Location: connexion_form.php');
 		}
 
+		if(isset($_SESSION['Id_utilisateur'])) {
+			$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// echo "________________________________________________________________________ $Id_utilisateur";
+		}
+
+
+
 		?>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3029,6 +2738,11 @@
 			if (!$_SESSION['Mot_de_passe_admin']) { // Si la session password n'est pas actif sur le site
 			 	header('Location: connexion_form.php');
 			}
+
+			// if(isset($_SESSION['Id_utilisateur'])) {
+			// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// 	// echo "________________________________________________________________________ $Id_utilisateur";
+			// }
 			?>
 
 			<meta charset="utf-8">
@@ -3069,26 +2783,32 @@
 	  				<select class="select1" name="select" onChange="location = this.options[this.selectedIndex].value;">
 
 	  					<option value="deconnexion_admin_form1_1.php">----Choix----</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=1">Ajouter un personnel</option>
+	  					<!-- <option value="deconnexion_admin_form1_2.php?select=1">Ajouter un personnel</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=2">Ajouter un bureau</option>
+<<<<<<< HEAD
 	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=4">Enregistrer une demande</option>
 	  					<option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
+=======
+	  					<option value="deconnexion_admin_form1_2.php?select=3">Ajouter une fonction</option> -->
+	  					<option value="deconnexion_admin_form1_2.php?select=4">Enregistrer une demande</option>
+	  					<!-- <option value="deconnexion_admin_form1_2.php?select=5">Ajouter un stagiaire</option>
+>>>>>>> c211e38b4caf1e2db93c311014b1ee59434a92f4
 	  					<option value="deconnexion_admin_form1_2.php?select=51">Modifier ou Supprimer un stagiaire</option>
-	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option>
+	  					<option value="deconnexion_admin_form1_2.php?select=6">Ajouter un établissement</option> -->
 
-	  					<option value="deconnexion_admin_form1_1.php">---------------------------</option>
+	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
 
-	  					<option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option>
+	  					<!-- <option value="deconnexion_admin_form1_3.php?select=1">Consulter les personnels</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=2">Consulter les bureaux</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=3">Consulter les fonctions</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=4">Consulter les demandes</option>
 	  					<option value="deconnexion_admin_form1_3.php?select=51">Consulter les stagiaires</option>
-	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option>
+	  					<option value="deconnexion_admin_form1_3.php?select=6">Consulter les établissements</option> -->
 
-	  					<option value="deconnexion_admin_form1_1.php">---------------------------</option>
+	  					<!-- <option value="deconnexion_admin_form1_1.php">---------------------------</option> -->
 
-	  					<option value="deconnexion_admin_form1_6.php">Changer les coordonnées du compte</option>
+	  					<!-- <option value="deconnexion_admin_form1_6.php">Changer les coordonnées du compte</option> -->
 
 
 						
@@ -3431,10 +3151,8 @@
 														while($row=mysqli_fetch_assoc($result))
 														{?>
 													
-
 																<option value="<?=$row['Nom'];?>"<?=$row['Nom'] == ($_REQUEST['selectBureau']??'') ? ' selected="selected"' : '';?>><?=$row['Nom'];?></option>
 
-														
 															<?php
 														}
 														mysqli_close($conn);
@@ -4145,8 +3863,15 @@
 
 							<form class="needs-validation" novalidate method="REQUEST" action="select.php">
 
+							<?php
+								// if(isset($_SESSION['Id_utilisateur'])) {
+								// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+								// 	echo "________________________________________________________________________ $Id_utilisateur";
+								// }
+							?>
 								<input type="number" hidden="" name="Id_demande" value="<?= isset($_REQUEST['Id_demande'])?$_REQUEST['Id_demande']:'';?>">
 								<input type="number" hidden="" name="Id_etablissement" value="<?= isset($_REQUEST['Id_etablissement'])?$_REQUEST['Id_etablissement']:'';?>">
+								<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 								
 
 									<div class="row">

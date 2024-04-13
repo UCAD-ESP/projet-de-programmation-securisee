@@ -4,8 +4,6 @@
 	
 	function connexion() {
 
-	
-	
 		$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
 
 		if (isset($_REQUEST['envoi'])) {
@@ -34,27 +32,37 @@
 					exit;
 				}
 
-				$req = "SELECT * FROM administrateur";
-				$result = mysqli_query($conn, $req);
+				// Requête SQL pour sélectionner toutes les colonnes de la table "utilisateur"
+				// $req = "SELECT * FROM utilisateur";
 				
+				// $lg = $_REQUEST['Login'];
 
+				$req = "SELECT * FROM utilisateur WHERE Login = '$Login'";
+
+				// Exécution de la requête SQL et stockage du résultat dans $result
+				$result = mysqli_query($conn, $req);
+
+				// Boucle while pour parcourir chaque ligne de résultat de la requête
 				while($row=mysqli_fetch_assoc($result))
 				{
-					$Login_defaut = $row['Login'];
-					$Password_defaut = $row['Mot_de_passe'];
+					if ($row['Role'] == 'admin') {
+						// Extraction de la valeur de la colonne "Login" de la ligne actuelle et stockage dans $Login_defaut
+						$Login_defaut = $row['Login'];
 
+						// Extraction de la valeur de la colonne "Mot_de_passe" de la ligne actuelle et stockage dans $Password_defaut
+						$Password_defaut = $row['Mot_de_passe'];
+						$Id_utilisateur = $row['Id_utilisateur'];
+						$Role = $row['Role'];
+					}
+					
 				}
+
 				mysqli_close($conn);
 
 
-
-				
-
 				$Login = htmlspecialchars($_REQUEST['Login']);
 
-				if ($Login == $Login_defaut && (sha1($Mot_de_passe) == $Password_defaut || $Mot_de_passe == $Password_defaut)) {
-
-	
+				if ($Login == $Login_defaut && (sha1($Mot_de_passe) == $Password_defaut || $Mot_de_passe == $Password_defaut) && $Role == "admin") {
 
 						session_start();
 						
@@ -64,7 +72,9 @@
 						// }
 
 						//$_SESSION['Message'] = '';
-						$_SESSION['Mot_de_passe_admin'] = $Mot_de_passe;
+						$_SESSION['Mot_de_passe_admin'] = $Password_defaut;
+						$_SESSION['Login'] = $Login_defaut;
+						$_SESSION['Id_utilisateur'] = $Id_utilisateur;
 
 						header('Location: deconnexion_admin_form1.php');
 
@@ -76,10 +86,11 @@
 
 					$recupId = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
 					$recupId->execute(array($Login, $Mot_de_passe));
-					$recupMatricule = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
-					$recupMatricule->execute(array($Login, $Mot_de_passe));
+					// $recupMatricule = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
+					// $recupMatricule->execute(array($Login, $Mot_de_passe));
 
-					if ($recupId->rowCount() > 0 && $recupMatricule->rowCount() > 0) { 
+					// if ($recupId->rowCount() > 0 && $recupMatricule->rowCount() > 0) { 
+					if ($recupId->rowCount() > 0) { 
 
 						session_start();
 						
@@ -91,7 +102,7 @@
 						$_SESSION['Login'] = $Login;
 						$_SESSION['Mot_de_passe'] = $Mot_de_passe;
 						$_SESSION['Id_utilisateur'] = $recupId->fetch()['Id_utilisateur'];
-						$_SESSION['Matricule_personnel'] = $recupMatricule->fetch()['Matricule_personnel'];
+						$_SESSION['Matricule_personnel'] = $recupId->fetch()['Matricule_personnel'];
 						//echo 'Bienvenue'.' '.$_SESSION['login'].' '.$_SESSION['id'];
 						header('Location: deconnexion_form1.php');
 
@@ -266,8 +277,8 @@
 							inscription_form();
 
 						} else {
-							$insertUser = $bdd->prepare('INSERT INTO utilisateur (Matricule_personnel, Login, Mot_de_passe) VALUES (?,?,?)');
-							$insertUser->execute(array($Matricule_personnel, $Login, $Mot_de_passe));
+							$insertUser = $bdd->prepare('INSERT INTO utilisateur (Matricule_personnel, Login, Role, Mot_de_passe) VALUES (?,?,?,?)');
+							$insertUser->execute(array($Matricule_personnel, $Login, "user", $Mot_de_passe));
 
 							$recupUser = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ? AND Login = ? AND Mot_de_passe = ?');
 							$recupUser->execute(array($Matricule_personnel, $Login, $Mot_de_passe));
@@ -352,7 +363,6 @@
 	
 
 
-
 	function deconnexion() {
 		session_start(); 
 		setcookie('Login', '', time()-3600);
@@ -377,10 +387,6 @@
 
 				$Login = htmlspecialchars($_REQUEST['Login']);
 
-
-				
-
-
 					
 				$recupId_employe = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ?');
 				$recupId_employe->execute(array($Login));
@@ -389,12 +395,11 @@
 				if ($recupId_employe->rowCount() > 0) {
 
 					session_start();
-					$_SESSION['Id_utilisateurs'] = $recupId_employe->fetch()['Id_utilisateur'];
+					$_SESSION['Id_utilisateur'] = $recupId_employe->fetch()['Id_utilisateur'];
 
 					$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ?');
 					$recupLogin->execute(array($Login));
 					$_SESSION['Login'] = $Login = $recupLogin->fetch()['Login'];
-
 
 
 					header('Location: confirmer_password_form.php');
