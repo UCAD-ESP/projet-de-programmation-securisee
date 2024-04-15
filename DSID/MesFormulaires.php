@@ -1561,6 +1561,7 @@
 
 			session_start();
 			$Matricule_personnel = $_SESSION['Matricule_personnel'];
+			// echo "___________________________________________________________________________________".$Matricule_personnel;
 			if (!$_SESSION['Mot_de_passe']) { // Si la session password n'est pas actif sur le site
 			 	header('Location: connexion_form.php');
 			}
@@ -1668,27 +1669,21 @@
 							$recupDemande2->execute(array($recherche));
 
 							if ($recupDemande2->rowCount() > 0) {
-
 								$recherche1 = $recupDemande2->fetch()['Id_demande'];
-
 							}
 
 							$recupPersonnel = $bdd->prepare('SELECT * FROM personnel WHERE Nom = ?');		
 							$recupPersonnel->execute(array($recherche));
 
 							if ($recupPersonnel->rowCount() > 0) {
-
 								$recherche2 = $recupPersonnel->fetch()['Id_personnel'];
-
 							}
 
 							$recupPersonnel1 = $bdd->prepare('SELECT * FROM personnel WHERE Prenom = ?');		
 							$recupPersonnel1->execute(array($recherche));
 
 							if ($recupPersonnel1->rowCount() > 0) {
-
 								$recherche2 = $recupPersonnel1->fetch()['Id_personnel'];
-
 							}
 
 					
@@ -2394,7 +2389,7 @@
 								 
 									    	<div class="input-group input-groupD">
 									   
-										        <input type="submit" class="bouton" name="envoi_stage1" value="Affeccter">
+										        <input type="submit" class="bouton" name="envoi_stage1" value="Clôturer">
 							 					
 										    </div>
 								  		</div>	
@@ -2828,10 +2823,10 @@
 			 	header('Location: connexion_form.php');
 			}
 
-			if(isset($_SESSION['Id_utilisateur'])) {
-				$Id_utilisateur = $_SESSION['Id_utilisateur'];
-				// echo "________________________________________________________________________ $Id_utilisateur";
-			}
+			// if(isset($_SESSION['Id_utilisateur'])) {
+			// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// 	// echo "________________________________________________________________________ $Id_utilisateur";
+			// }
 			
 			?>
 

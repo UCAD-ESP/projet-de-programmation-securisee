@@ -1949,8 +1949,6 @@
 				$extension = pathinfo($Convention_nom, PATHINFO_EXTENSION);
 				$Convention = $_FILES['Convention']['tmp_name'];
 
-
-
 				if (isset($Convention) && $_FILES['Convention']['size'] > 1000000) {
 					?>
 					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">

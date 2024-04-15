@@ -86,11 +86,11 @@
 
 					$recupId = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
 					$recupId->execute(array($Login, $Mot_de_passe));
-					// $recupMatricule = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
-					// $recupMatricule->execute(array($Login, $Mot_de_passe));
+					$recupMatricule = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
+					$recupMatricule->execute(array($Login, $Mot_de_passe));
 
-					// if ($recupId->rowCount() > 0 && $recupMatricule->rowCount() > 0) { 
-					if ($recupId->rowCount() > 0) { 
+					if ($recupId->rowCount() > 0 && $recupMatricule->rowCount() > 0) { 
+					// if ($recupId->rowCount() > 0) { 
 
 						session_start();
 						
@@ -102,7 +102,7 @@
 						$_SESSION['Login'] = $Login;
 						$_SESSION['Mot_de_passe'] = $Mot_de_passe;
 						$_SESSION['Id_utilisateur'] = $recupId->fetch()['Id_utilisateur'];
-						$_SESSION['Matricule_personnel'] = $recupId->fetch()['Matricule_personnel'];
+						$_SESSION['Matricule_personnel'] = $recupMatricule->fetch()['Matricule_personnel'];
 						//echo 'Bienvenue'.' '.$_SESSION['login'].' '.$_SESSION['id'];
 						header('Location: deconnexion_form1.php');
 

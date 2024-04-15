@@ -189,8 +189,7 @@ INSERT INTO `personnel` (`Id_personnel`, `Id_bureau`, `Id_fonction`, `Matricule_
 
 INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Role`, `Mot_de_passe`) 
 VALUES 
-('111', '2345', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
-('112', '1234', 'pepere', 'user', '34ce8a09f4fed870b2c02a213f3d443b6e8fc852');
+('111', '2345', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 
 
@@ -200,9 +199,9 @@ INSERT INTO `etablissement` (`Id_etablissement`, `Nom`, `Telephone`, `Email`, `A
 
 
 INSERT INTO `demande` (`Id_demande`, `Id_etablissement`, `Id_utilisateur`, `Niveau`, `Domaine`, `Nom_demandeur`, `Prenom_demandeur`, `Adresse`, `Date_naissance`, `Lieu_naissance`, `Telephone`, `Email`, `Decision`) VALUES
-(1, 1, 112, 'mastere 1', 'informatique', 'Ibrahima', 'diagne', 'amitie 2', '1999-04-14', 'Dakar', 775211787, 'ibrahima@email.com', 'Attente'),
-(2, 1, 112, 'mastere 2', 'informatique', 'Baba', 'keke', 'amitie 1', '1999-04-14', 'Dakar', 885211787, 'baba@email.com', 'Attente'),
-(3, 1, 112, 'mastere 2', 'informatique', 'Mouhamed', 'diop', 'amitie 1', '1999-04-14', 'Dakar', 995211787, 'mouhamed@email.com', 'Attente');
+(1, 1, 111, 'mastere 1', 'informatique', 'Ibrahima', 'diagne', 'amitie 2', '1999-04-14', 'Dakar', 775211787, 'ibrahima@email.com', 'Attente'),
+(2, 1, 111, 'mastere 2', 'informatique', 'Baba', 'keke', 'amitie 1', '1999-04-14', 'Dakar', 885211787, 'baba@email.com', 'Attente'),
+(3, 1, 111, 'mastere 2', 'informatique', 'Mouhamed', 'diop', 'amitie 1', '1999-04-14', 'Dakar', 995211787, 'mouhamed@email.com', 'Attente');
 
 
 -- CREATE TABLE Matiere (
