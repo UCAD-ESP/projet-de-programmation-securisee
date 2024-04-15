@@ -1894,10 +1894,10 @@
 			 	header('Location: connexion_form.php');
 			}
 
-			if(isset($_SESSION['Id_utilisateur'])) {
-				$Id_utilisateur = $_SESSION['Id_utilisateur'];
-				// echo "________________________________________________________________________ $Id_utilisateur";
-			}
+			// if(isset($_SESSION['Id_utilisateur'])) {
+			// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+			// 	// echo "________________________________________________________________________ $Id_utilisateur";
+			// }
 			?>
 			<meta charset="utf-8">
 			<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
@@ -1940,9 +1940,6 @@
 							<input type="number" hidden="" name="Id_demande" value="<?=isset($_REQUEST['Id_demande'])?$_REQUEST['Id_demande']:'';?>">
 							<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 							
-							<?php
-							echo "______________________________________________________________________".$_SESSION['Id_utilisateur'];
-							?>
 							
 							<input type="text" maxlength="50" hidden=""  pattern="[A-Za-z0-9'àáâãäåèéêëìíîïðòóôõöùúûüýÿ -]{2,50}" class="form-control" id="validationCustomDemandeur"  name="Demandeur" value="<?=$_REQUEST['Demandeur']??'';?>" required="" aria-describedby="inputGroupPrepend">
 	
@@ -2720,10 +2717,10 @@
 		 	header('Location: connexion_form.php');
 		}
 
-		if(isset($_SESSION['Id_utilisateur'])) {
-			$Id_utilisateur = $_SESSION['Id_utilisateur'];
-			// echo "________________________________________________________________________ $Id_utilisateur";
-		}
+		// if(isset($_SESSION['Id_utilisateur'])) {
+		// 	$Id_utilisateur = $_SESSION['Id_utilisateur'];
+		// 	// echo "________________________________________________________________________ $Id_utilisateur";
+		// }
 
 
 
