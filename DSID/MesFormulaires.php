@@ -1893,6 +1893,11 @@
 			if (!$_SESSION['Mot_de_passe']) { // Si la session password n'est pas actif sur le site
 			 	header('Location: connexion_form.php');
 			}
+
+			if(isset($_SESSION['Id_utilisateur'])) {
+				$Id_utilisateur = $_SESSION['Id_utilisateur'];
+				// echo "________________________________________________________________________ $Id_utilisateur";
+			}
 			?>
 			<meta charset="utf-8">
 			<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
@@ -1933,6 +1938,11 @@
 							<input type="number" hidden="" name="Id_stage" value="<?=isset($_REQUEST['Id_stage'])?$_REQUEST['Id_stage']:'';?>">
 							<input type="number" hidden="" name="Id_personnel" value="<?=isset($_REQUEST['Id_personnel'])?$_REQUEST['Id_personnel']:'';?>">
 							<input type="number" hidden="" name="Id_demande" value="<?=isset($_REQUEST['Id_demande'])?$_REQUEST['Id_demande']:'';?>">
+							<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
+							
+							<?php
+							echo "______________________________________________________________________".$_SESSION['Id_utilisateur'];
+							?>
 							
 							<input type="text" maxlength="50" hidden=""  pattern="[A-Za-z0-9'àáâãäåèéêëìíîïðòóôõöùúûüýÿ -]{2,50}" class="form-control" id="validationCustomDemandeur"  name="Demandeur" value="<?=$_REQUEST['Demandeur']??'';?>" required="" aria-describedby="inputGroupPrepend">
 	
@@ -2365,7 +2375,7 @@
 										    				
 
 										    			</select>
-							1											    	
+																	    	
 
 											    </div>										    
 
@@ -2820,6 +2830,12 @@
 			if (!$_SESSION['Mot_de_passe_admin']) { // Si la session password n'est pas actif sur le site
 			 	header('Location: connexion_form.php');
 			}
+
+			if(isset($_SESSION['Id_utilisateur'])) {
+				$Id_utilisateur = $_SESSION['Id_utilisateur'];
+				// echo "________________________________________________________________________ $Id_utilisateur";
+			}
+			
 			?>
 
 			<meta charset="utf-8">
@@ -4389,6 +4405,7 @@
 							<input type="number" hidden="" name="Id_stage" value="<?=isset($_REQUEST['Id_stage'])?$_REQUEST['Id_stage']:'';?>">
 							<input type="number" hidden="" name="Id_personnel" value="<?=isset($_REQUEST['Id_personnel'])?$_REQUEST['Id_personnel']:'';?>">
 							<input type="number" hidden="" name="Id_demande" value="<?=isset($_REQUEST['Id_demande'])?$_REQUEST['Id_demande']:'';?>">
+							<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 
 								<div class="row">
 								
@@ -4496,14 +4513,18 @@
 										    	<div class="selection_1">
 										    		<select class="selection1_1" name="selectEncadrant">
 
-										    			<?php
-															if(isset($_REQUEST['selectEncadrant'])):
-															    echo "<option selected>".$_REQUEST['selectEncadrant']."</option>";
-															    
-															else:
-															    echo "<option value = '------------Choix Encadrant------------'>------------Choix Encadrant------------</option>";
-															endif;
-														?>
+												
+													<?php
+													if(isset($_REQUEST['selectEncadrant']) && $_REQUEST['selectEncadrant'] !== null && $_REQUEST['selectEncadrant'] !== "null" && $_REQUEST['selectEncadrant'] !== "") {
+														echo "<option selected>".$_REQUEST['selectEncadrant'] === null?'':''."</option>";
+													} else {
+														echo "<option value='------------Choix Encadrant------------'>------------Choix Encadrant------------</option>";
+													}
+													?>
+
+
+
+
 
 												        
 				
@@ -4763,6 +4784,11 @@
 						}
 
 						if (isset($_REQUEST['valider_stage'])) {
+
+							// $Prenom_demandeur = "";
+							// $Nom_demandeur = "";
+							// $Domaine = "";
+
 										
 							$recherche = htmlspecialchars($_REQUEST['valider_stage']);
 							$recherche1 = -1;
@@ -4863,10 +4889,13 @@
 
 									<td class="td51"><?=$row['Nom_stage'];?></td>
 									<td class="td51"><?=$row['Sujet_stage'];?></td>
-									<td class="td51"><?=$Prenom_personnel." ".$Nom_personnel;?></td>
-									<td class="td51"><?=$Prenom_demandeur." ".$Nom_demandeur;?></td>
+									<td class="td51"><?= isset($Prenom_personnel) ? $Prenom_personnel : ''; ?> <?= isset($Nom_personnel) ? $Nom_personnel : ''; ?></td>									<td class="td51"><?=$row['Niveau_stage'];?></td>
+									<td class="td51"><?= isset($Prenom_demandeur) ? $Prenom_demandeur : ''; ?> <?= isset($Nom_demandeur) ? $Nom_demandeur : ''; ?></td>									<td class="td51"><?=$row['Niveau_stage'];?></td>
 									<td class="td51"><?=$row['Niveau_stage'];?></td>
 									<td class="td51"><?=$Domaine;?></td>
+									<td class="td51"><?= isset($Domaine) ? $Domaine : ''; ?></td>									
+									<td class="td51"><?=$row['Niveau_stage'];?></td>
+
 									<td class="td51">
 
 										<input type="button" class="bouton2" name="envoi" value="Modifier" onclick="window.location.href='deconnexion_admin_form1_2_modifier.php?Id_stage=<?=str_replace("'", "\'", $row['Id_stage']);?>&Nom_stage=<?=str_replace("'", "\'", $row['Nom_stage']);?>&Sujet_stage=<?=str_replace("'", "\'", $row['Sujet_stage']);?>&Niveau_stage=<?=str_replace("'", "\'", $row['Niveau_stage']);?>&Id_personnel=<?=$Id_personnel;?>&Id_demande=<?=$Id_demande;?>';">
@@ -4928,14 +4957,38 @@
 									<td class="td51"><?=$row['Nom_stage'];?></td>
 									<td class="td51"><?=$row['Sujet_stage'];?></td>
 									<td class="td51"><?=($Prenom_personnel??'')." ".($Nom_personnel??'');?></td>
-									<td class="td51"><?=$Prenom_demandeur." ".$Nom_demandeur;?></td>
+									<td class="td51"><?= isset($Prenom_demandeur) ? $Prenom_demandeur : ''; ?> <?= isset($Nom_demandeur) ? $Nom_demandeur : ''; ?></td>									
 									<td class="td51"><?=$row['Niveau_stage'];?></td>
-									<td class="td51"><?=$Domaine;?></td>
+									<td class="td51"><?=($Domaine??'');?></td>
 									<td class="td51">
 
-										<input type="button" class="bouton2" name="envoi" value="Modifier" onclick="window.location.href='deconnexion_admin_form1_2_modifier.php?Id_stage=<?=str_replace("'", "\'", $row['Id_stage']);?>&Nom_stage=<?=str_replace("'", "\'", $row['Nom_stage']);?>&Sujet_stage=<?=str_replace("'", "\'", $row['Sujet_stage']);?>&Niveau_stage=<?=str_replace("'", "\'", $row['Niveau_stage']);?>&Id_personnel=<?=$Id_personnel;?>&Id_demande=<?=$Id_demande;?>';">
+									<?php
+										if(isset($row['Id_stage']) && isset($row['Nom_stage']) && isset($row['Sujet_stage']) && isset($row['Niveau_stage'])) {
+											?>
+											<input type="button" class="bouton2" name="envoi" value="Modifier" onclick="window.location.href='deconnexion_admin_form1_2_modifier.php?Id_stage=<?=str_replace("'", "\'", $row['Id_stage']);?>&Nom_stage=<?=str_replace("'", "\'", $row['Nom_stage']);?>&Sujet_stage=<?=str_replace("'", "\'", $row['Sujet_stage']);?>&Niveau_stage=<?=str_replace("'", "\'", $row['Niveau_stage']);?>&Id_personnel=<?=$Id_personnel;?>&Id_demande=<?=$Id_demande;?>';">
+											<?php
+										} else {	
+											?>
+											<input type="button" class="bouton2" name="envoi" value="Modifier" onclick="window.location.href='deconnexion_admin_form1_2_modifier.php?Id_stage=<?= isset($row['Id_stage']) ? str_replace("'", "\'", $row['Id_stage']) : ''; ?>&Nom_stage=<?= isset($row['Nom_stage']) ? str_replace("'", "\'", $row['Nom_stage']) : ''; ?>&Sujet_stage=<?= isset($row['Sujet_stage']) ? str_replace("'", "\'", $row['Sujet_stage']) : ''; ?>&Niveau_stage=<?= isset($row['Niveau_stage']) ? str_replace("'", "\'", $row['Niveau_stage']) : ''; ?>&Id_personnel=<?= isset($Id_personnel) ? $Id_personnel : ''; ?>&Id_demande=<?= isset($Id_demande) ? $Id_demande : ''; ?>';">
+											<?php
+										}
+										
+									?>
 
-										<input type="button" class="bouton2" name="envoi" value="Supprimer" onclick="window.location.href='deconnexion_admin_form1_2_supprimer.php?Id_stage=<?=str_replace("'", "\'", $row['Id_stage']);?>&Nom_stage=<?=str_replace("'", "\'", $row['Nom_stage']);?>&Sujet_stage=<?=str_replace("'", "\'", $row['Sujet_stage']);?>&Niveau_stage=<?=str_replace("'", "\'", $row['Niveau_stage']);?>&Id_personnel=<?=$Id_personnel;?>&Id_demande=<?=$Id_demande;?>';">
+
+									<?php
+										if(isset($row['Id_stage']) && isset($row['Nom_stage']) && isset($row['Sujet_stage']) && isset($row['Niveau_stage'])) {
+											?>
+												<input type="button" class="bouton2" name="envoi" value="Supprimer" onclick="window.location.href='deconnexion_admin_form1_2_supprimer.php?Id_stage=<?=str_replace("'", "\'", $row['Id_stage']);?>&Nom_stage=<?=str_replace("'", "\'", $row['Nom_stage']);?>&Sujet_stage=<?=str_replace("'", "\'", $row['Sujet_stage']);?>&Niveau_stage=<?=str_replace("'", "\'", $row['Niveau_stage']);?>&Id_personnel=<?=$Id_personnel;?>&Id_demande=<?=$Id_demande;?>';">
+											<?php
+										} else {	
+											?>
+												<input type="button" class="bouton2" name="envoi" value="Supprimer" onclick="window.location.href='deconnexion_admin_form1_2_supprimer.php?Id_stage=<?= isset($row['Id_stage']) ? str_replace("'", "\'", $row['Id_stage']) : ''; ?>&Nom_stage=<?= isset($row['Nom_stage']) ? str_replace("'", "\'", $row['Nom_stage']) : ''; ?>&Sujet_stage=<?= isset($row['Sujet_stage']) ? str_replace("'", "\'", $row['Sujet_stage']) : ''; ?>&Niveau_stage=<?= isset($row['Niveau_stage']) ? str_replace("'", "\'", $row['Niveau_stage']) : ''; ?>&Id_personnel=<?= isset($Id_personnel) ? $Id_personnel : ''; ?>&Id_demande=<?= isset($Id_demande) ? $Id_demande : ''; ?>';">
+											<?php
+										}
+									?>
+
+
 
 									
 
@@ -4964,12 +5017,9 @@
 			
 			?>
 
-			
-
 				<div class="form_5">
 
 					<br>
-
 
 						<form action="rechercher.php" method="REQUEST" class="form_r3">			      	
 
@@ -4981,12 +5031,6 @@
 				                    </div>
 
 				       	 </form>
-				
-			
-
-							
-								
-				
 
 					<?php
 
@@ -5021,19 +5065,13 @@
 							$recupEtablissement->execute(array($recherche));
 
 							if ($recupEtablissement->rowCount() > 0) {
-
 								$recherche = $recupEtablissement->fetch()['Id_etablissement'];
-
 							}
-
-					
 
 							$req = 'SELECT * FROM demande WHERE Id_etablissement LIKE  "%'.$recherche.'%" OR Niveau LIKE  "%'.$recherche.'%" OR Domaine LIKE  "%'.$recherche.'%" OR Nom_demandeur LIKE  "%'.$recherche.'%" OR Prenom_demandeur LIKE  "%'.$recherche.'%" Or Decision LIKE  "%'.$recherche.'%"   ORDER BY Nom_demandeur ASC';
 						
-
 							$result = mysqli_query($conn, $req);
 							?>
-
 								<table class="table4">
 								<tr>
 									<th class="th4">-|| Décision ||-</th>
@@ -5064,10 +5102,8 @@
 								}
 
 								if ($row['Decision'] == 'Attente') {
-					
-										?>
+									?>
 										<tr>
-
 											<td class="td4"><?=$row['Decision'];?></td>
 											<td class="td4"><?=$row['Nom_demandeur'];?></td>
 											<td class="td4"><?=$row['Prenom_demandeur'];?></td>
@@ -5075,19 +5111,12 @@
 											<td class="td4"><?=$row['Niveau'];?></td>
 											<td class="td4"><?=$row['Domaine'];?></td>
 											<td class="td4">
-
-									
 												<input type="button" class="bouton2" name="envoi" value="Ajouter" onclick="window.location.href='deconnexion_admin_form1_2.php?selectNiveau1=<?=str_replace("'", "\'", $row['Niveau']);?>&select=51&Id_demande=<?=$row['Id_demande'];?>&Id_etablissement=<?=$row['Id_etablissement'];?>&Niveau=<?=str_replace("'", "\'", $row['Niveau']);?>&Domaine=<?=str_replace("'", "\'", $row['Domaine']);?>&NomD=<?=str_replace("'", "\'", $row['Nom_demandeur']);?>&PrenomD=<?=str_replace("'", "\'", $row['Prenom_demandeur']);?>&AdresseD=<?=str_replace("'", "\'", $row['Adresse']);?>&dateN=<?=str_replace("'", "\'", $row['Date_naissance']);?>&Lieu=<?=str_replace("'", "\'", $row['Lieu_naissance']);?>&TelephoneD=<?=str_replace("'", "\'", $row['Telephone']);?>&EmailD=<?=str_replace("'", "\'", $row['Email']);?>&selectDecision=<?=str_replace("'", "\'", $row['Decision']);?>&selectEtablissement=<?=str_replace("'", "\'", $NomE);?>';">
-
-
-
 											</td>
 										</tr>
-									
-								<?php
+									<?php
 								}		
 							}
-
 
 
 						} else {
@@ -5095,7 +5124,6 @@
 							$req = "SELECT * FROM demande WHERE Decision = 'Attente' ORDER BY Nom_demandeur ASC";
 							$result = mysqli_query($conn, $req);
 							?>
-
 								<table class="table4">
 								<tr>
 									<th class="th4">-|| Décision ||-</th>
@@ -5125,26 +5153,18 @@
 									$selectPays = '';
 								}
 
-								
-
-
 								?>
-								<tr>
-
-									<td class="td4"><?=$row['Decision'];?></td>
-									<td class="td4"><?=$row['Nom_demandeur'];?></td>
-									<td class="td4"><?=$row['Prenom_demandeur'];?></td>
-									<td class="td4"><?=$NomE;?></td>
-									<td class="td4"><?=$row['Niveau'];?></td>
-									<td class="td4"><?=$row['Domaine'];?></td>
-									<td class="td4">
-
-										<input type="button" class="bouton2" name="envoi" value="Ajouter" onclick="window.location.href='deconnexion_admin_form1_2.php?selectNiveau1=<?=str_replace("'", "\'", $row['Niveau']);?>&select=51&Id_demande=<?=$row['Id_demande'];?>&Id_etablissement=<?=$row['Id_etablissement'];?>&Niveau=<?=str_replace("'", "\'", $row['Niveau']);?>&Domaine=<?=str_replace("'", "\'", $row['Domaine']);?>&NomD=<?=str_replace("'", "\'", $row['Nom_demandeur']);?>&PrenomD=<?=str_replace("'", "\'", $row['Prenom_demandeur']);?>&AdresseD=<?=str_replace("'", "\'", $row['Adresse']);?>&dateN=<?=str_replace("'", "\'", $row['Date_naissance']);?>&Lieu=<?=str_replace("'", "\'", $row['Lieu_naissance']);?>&TelephoneD=<?=str_replace("'", "\'", $row['Telephone']);?>&EmailD=<?=str_replace("'", "\'", $row['Email']);?>&selectDecision=<?=str_replace("'", "\'", $row['Decision']);?>&selectEtablissement=<?=str_replace("'", "\'", $NomE);?>';">
-									
-
-									</td>
-								</tr>
-								
+									<tr>
+										<td class="td4"><?=$row['Decision'];?></td>
+										<td class="td4"><?=$row['Nom_demandeur'];?></td>
+										<td class="td4"><?=$row['Prenom_demandeur'];?></td>
+										<td class="td4"><?=$NomE;?></td>
+										<td class="td4"><?=$row['Niveau'];?></td>
+										<td class="td4"><?=$row['Domaine'];?></td>
+										<td class="td4">
+											<input type="button" class="bouton2" name="envoi" value="Ajouter" onclick="window.location.href='deconnexion_admin_form1_2.php?selectNiveau1=<?=str_replace("'", "\'", $row['Niveau']);?>&select=51&Id_demande=<?=$row['Id_demande'];?>&Id_etablissement=<?=$row['Id_etablissement'];?>&Niveau=<?=str_replace("'", "\'", $row['Niveau']);?>&Domaine=<?=str_replace("'", "\'", $row['Domaine']);?>&NomD=<?=str_replace("'", "\'", $row['Nom_demandeur']);?>&PrenomD=<?=str_replace("'", "\'", $row['Prenom_demandeur']);?>&AdresseD=<?=str_replace("'", "\'", $row['Adresse']);?>&dateN=<?=str_replace("'", "\'", $row['Date_naissance']);?>&Lieu=<?=str_replace("'", "\'", $row['Lieu_naissance']);?>&TelephoneD=<?=str_replace("'", "\'", $row['Telephone']);?>&EmailD=<?=str_replace("'", "\'", $row['Email']);?>&selectDecision=<?=str_replace("'", "\'", $row['Decision']);?>&selectEtablissement=<?=str_replace("'", "\'", $NomE);?>';">
+										</td>
+									</tr>
 								<?php
 							}
 						}

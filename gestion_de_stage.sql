@@ -108,6 +108,7 @@ CREATE TABLE stage(
 	Id_stage int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Id_demande int(2),
 	Id_personnel int(2),
+	Id_utilisateur int(2),
 	Nom_stage varchar(50),
 	Niveau_stage varchar(50),
 	Sujet_stage text,
@@ -128,7 +129,9 @@ CREATE TABLE stage(
 	Satisfait ENUM('Oui', 'Non'),
 	Jugement_formation ENUM('trop théorique', 'trop pratique', 'trop spécialisée', 'trop générale', 'obsolète', 'trop avancée', 'conforme à nos besoins'),
 	CONSTRAINT fk_demande_stage FOREIGN KEY(Id_demande) REFERENCES demande(Id_demande) ON DELETE SET NULL ON UPDATE CASCADE,
-	CONSTRAINT fk_personnel_stage FOREIGN KEY(Id_personnel) REFERENCES personnel(Id_personnel) ON DELETE SET NULL ON UPDATE CASCADE
+	CONSTRAINT fk_personnel_stage FOREIGN KEY(Id_personnel) REFERENCES personnel(Id_personnel) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT fk_utilisateur_stage FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur) ON DELETE SET NULL ON UPDATE CASCADE
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -187,11 +190,20 @@ INSERT INTO `personnel` (`Id_personnel`, `Id_bureau`, `Id_fonction`, `Matricule_
 INSERT INTO `utilisateur` (`Id_utilisateur`, `Matricule_personnel`, `Login`, `Role`, `Mot_de_passe`) 
 VALUES 
 ('111', '2345', 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
-('112', '1234', 'pepere', 'admin', '34ce8a09f4fed870b2c02a213f3d443b6e8fc852');
+('112', '1234', 'pepere', 'user', '34ce8a09f4fed870b2c02a213f3d443b6e8fc852');
 
 
 
 INSERT INTO `etablissement` (`Id_etablissement`, `Nom`, `Telephone`, `Email`, `Adresse`, `BP`, `Ville`, `Pays`) VALUES ('1', 'ESP', '338001122', 'esp@email.com', 'Fann', 'bp 5522', 'Dakar', 'Senegal');
+
+
+
+
+INSERT INTO `demande` (`Id_demande`, `Id_etablissement`, `Id_utilisateur`, `Niveau`, `Domaine`, `Nom_demandeur`, `Prenom_demandeur`, `Adresse`, `Date_naissance`, `Lieu_naissance`, `Telephone`, `Email`, `Decision`) VALUES
+(1, 1, 112, 'mastere 1', 'informatique', 'Ibrahima', 'diagne', 'amitie 2', '1999-04-14', 'Dakar', 775211787, 'ibrahima@email.com', 'Attente'),
+(2, 1, 112, 'mastere 2', 'informatique', 'Baba', 'keke', 'amitie 1', '1999-04-14', 'Dakar', 885211787, 'baba@email.com', 'Attente'),
+(3, 1, 112, 'mastere 2', 'informatique', 'Mouhamed', 'diop', 'amitie 1', '1999-04-14', 'Dakar', 995211787, 'mouhamed@email.com', 'Attente');
+
 
 -- CREATE TABLE Matiere (
 -- 	reference int NOT NULL,
@@ -199,4 +211,3 @@ INSERT INTO `etablissement` (`Id_etablissement`, `Nom`, `Telephone`, `Email`, `A
 -- 	coeff int,
 -- 	PRIMARY KEY (reference)
 -- ) ENGINE = InnoDB;
-

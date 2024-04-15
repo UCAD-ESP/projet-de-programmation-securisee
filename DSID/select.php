@@ -1081,8 +1081,8 @@
 
 				if ($selectDecision == 'Accepter' && $recupDemande->rowCount() > 0) {
 
-					$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Niveau_stage) VALUES (?,?)');
-					$insertStage->execute(array($Id_demande, $Niveau));
+					$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Id_utilisateur, Niveau_stage) VALUES (?,?,?)');
+					$insertStage->execute(array($Id_demande, $Id_utilisateur, $Niveau));
 
 				} else if ($selectDecision == 'Attente' && $recupDemande->rowCount() > 0) {
 
@@ -1144,8 +1144,8 @@
 
 					if ($selectDecision == 'Accepter' && $recupDemande->rowCount() > 0) {
 
-						$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Niveau_stage) VALUES (?,?)');
-						$insertStage->execute(array($Id_demande, $Niveau));
+						$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Id_utilisateur, Niveau_stage) VALUES (?,?,?)');
+						$insertStage->execute(array($Id_demande, $Id_utilisateur, $Niveau));
 
 					} else if ($selectDecision == 'Attente' && $recupDemande->rowCount() > 0) {
 
@@ -1480,6 +1480,9 @@
 		if (isset($_REQUEST['Id_demande'])) {
 			$Id_demande = htmlspecialchars($_REQUEST['Id_demande']);
 		}
+		if (isset($_REQUEST['Id_utilisateur'])) {
+			$Id_utilisateur = htmlspecialchars($_REQUEST['Id_utilisateur']);
+		}
 
 		$Stage = htmlspecialchars($_REQUEST['Stage']);
 		$Sujet = htmlspecialchars($_REQUEST['Sujet']);
@@ -1647,8 +1650,8 @@
 				} else {
 			
 
-						$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Id_personnel, Nom_stage, Niveau_stage, Sujet_stage) VALUES (?,?,?,?,?)');
-						$insertStage->execute(array($selectStagiaire, $selectEncadrant, $Stage, $selectNiveau, $Sujet));
+						$insertStage = $bdd->prepare('INSERT INTO stage (Id_demande, Id_utilisateur, Id_personnel, Nom_stage, Niveau_stage, Sujet_stage) VALUES (?,?,?,?,?,?)');
+						$insertStage->execute(array($selectStagiaire, $Id_utilisateur, $selectEncadrant, $Stage, $selectNiveau, $Sujet));
 
 						$recupStage = $bdd->prepare('SELECT * FROM stage WHERE Id_demande = ? AND Id_personnel = ?');
 						$recupStage->execute(array($selectStagiaire, $selectEncadrant));
@@ -1658,7 +1661,6 @@
 				
 
 						if ($recupStage->rowCount() > 0) {
-
 
 							?>
 							<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
@@ -1719,6 +1721,9 @@
 		}
 		if (isset($_REQUEST['Id_demande'])) {
 			$Id_demande = htmlspecialchars($_REQUEST['Id_demande']);
+		}
+		if (isset($_REQUEST['Id_utilisateur'])) {
+			$Id_utilisateur = htmlspecialchars($_REQUEST['Id_utilisateur']);
 		}
 
 		$Demandeur = htmlspecialchars($_REQUEST['Demandeur']);
