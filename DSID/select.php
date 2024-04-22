@@ -1968,7 +1968,6 @@
 					array_map('unlink', glob("Telechargements/$Id_stage$Id_personnel$Id_demande-*"));
 
 					if (move_uploaded_file($Convention, $Destination)) {
-					
 
 						$recupStage = $bdd->prepare('SELECT * FROM stage WHERE Id_stage = ? AND Id_personnel = ? AND Id_demande = ?');
 						$recupStage->execute(array($Id_stage, $Id_personnel, $Id_demande));
