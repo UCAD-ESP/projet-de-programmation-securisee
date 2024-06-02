@@ -149,20 +149,24 @@ CREATE TABLE stage(
 CREATE TABLE evenement(
 	Id_evenement int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Matricule_personnel int(2),
+	Id_utilisateur int(2),
 	Titre varchar(50),
 	Description text,
 	Date_debut datetime,
-	Date_fin datetime
+	Date_fin datetime,
+	CONSTRAINT fk_utilisateur_evenement FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE planning(
 	Id_planning int(2) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	Matricule_personnel int(2),
+	Id_utilisateur int(2),
 	Titre varchar(50),
 	Tache text,
 	Date_debut datetime,
-	Date_fin datetime
+	Date_fin datetime,
+	CONSTRAINT fk_utilisateur_planning FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

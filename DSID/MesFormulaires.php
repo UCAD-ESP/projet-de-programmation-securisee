@@ -521,6 +521,7 @@
 
 							<input hidden="" type="number" name="Matricule_personnel" value="<?= $_SESSION['Matricule_personnel']; ?>">
 							<input hidden="" type="number" name="Id_planning" value="<?= isset($_REQUEST['Id_planning'])?$_REQUEST['Id_planning']:'';?>">
+							<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 
 							<div class="row">
 
@@ -1246,6 +1247,7 @@
 
 							<input hidden="" type="number" name="Id_evenement" value="<?= htmlentities($event['Id_evenement']); ?>">
 							<input hidden="" type="number" name="Matricule_personnel" value="<?= $_SESSION['Matricule_personnel']; ?>">
+							<input type="number" hidden="" name="Id_utilisateur" value="<?= isset($_SESSION['Id_utilisateur'])?$_SESSION['Id_utilisateur']:'';?>">
 
 							<div class="row">
 

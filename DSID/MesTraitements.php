@@ -8,6 +8,7 @@
 
 		if (isset($_REQUEST['envoi'])) {
 
+			$Login_defaut = "";
 			$Login = htmlspecialchars($_REQUEST['Login']);
 			$Mot_de_passe = htmlspecialchars($_REQUEST['Mot_de_passe']);
 
@@ -60,7 +61,8 @@
 				mysqli_close($conn);
 
 
-				$Login = htmlspecialchars($_REQUEST['Login']);
+				// $Login = htmlspecialchars($_REQUEST['Login']);
+				
 
 				if ($Login == $Login_defaut && (sha1($Mot_de_passe) == $Password_defaut || $Mot_de_passe == $Password_defaut) && $Role == "admin") {
 
@@ -79,17 +81,17 @@
 						header('Location: deconnexion_admin_form1.php');
 
 		
-				} else {
+				} else  {
 
 					$Mot_de_passe = sha1($_REQUEST['Mot_de_passe']); /* Cripter le mot de passe*/
 					
 
-					$recupId = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
-					$recupId->execute(array($Login, $Mot_de_passe));
+					// $recupId = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
+					// $recupId->execute(array($Login, $Mot_de_passe));
 					$recupMatricule = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ? AND Mot_de_passe = ?');
 					$recupMatricule->execute(array($Login, $Mot_de_passe));
 
-					if ($recupId->rowCount() > 0 && $recupMatricule->rowCount() > 0) { 
+					if ($recupMatricule->rowCount() > 0) { 
 					// if ($recupId->rowCount() > 0) { 
 
 						session_start();
@@ -101,7 +103,7 @@
 
 						$_SESSION['Login'] = $Login;
 						$_SESSION['Mot_de_passe'] = $Mot_de_passe;
-						$_SESSION['Id_utilisateur'] = $recupId->fetch()['Id_utilisateur'];
+						$_SESSION['Id_utilisateur'] = $recupMatricule->fetch()['Id_utilisateur'];
 						$_SESSION['Matricule_personnel'] = $recupMatricule->fetch()['Matricule_personnel'];
 						//echo 'Bienvenue'.' '.$_SESSION['login'].' '.$_SESSION['id'];
 						header('Location: deconnexion_form1.php');
@@ -122,9 +124,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- <script>
-							alert('Votre mot de passe ou pseudo est incorrect !');
-						</script> -->
+						
 						<?php
 						require('MesFormulaires.php');
 						connexion_form();

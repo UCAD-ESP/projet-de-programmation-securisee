@@ -8,6 +8,9 @@
 			$Id_planning = htmlspecialchars($_REQUEST['Id_planning']);
 		}
 
+		if (isset($_REQUEST['Id_utilisateur'])) {
+			$Id_utilisateur = htmlspecialchars($_REQUEST['Id_utilisateur']);
+		}
 
 		$Matricule_personnel = htmlspecialchars($_REQUEST['Matricule_personnel']);
 		$titre = htmlspecialchars($_REQUEST['titre']);
@@ -181,8 +184,8 @@
 
 				} else {
 
-					$insertDate = $bdd->prepare('INSERT INTO planning (Matricule_personnel, Titre, Tache, Date_debut, Date_fin) VALUES (?,?,?,?,?)');
-					$insertDate->execute(array($Matricule_personnel, $titre, $tache, $Date_debut, $Date_fin));
+					$insertDate = $bdd->prepare('INSERT INTO planning (Matricule_personnel, Id_utilisateur, Titre, Tache, Date_debut, Date_fin) VALUES (?,?,?,?,?,?)');
+					$insertDate->execute(array($Matricule_personnel, $Id_utilisateur, $titre, $tache, $Date_debut, $Date_fin));
 
 					$recupDate = $bdd->prepare('SELECT * FROM planning WHERE Matricule_personnel = ? AND Titre = ?');
 					$recupDate->execute(array($Matricule_personnel, $titre));

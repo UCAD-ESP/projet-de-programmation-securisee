@@ -9,6 +9,10 @@
 		$Id_evenement = $_REQUEST['Id_evenement'];
 		$Matricule_personnel = $_REQUEST['Matricule_personnel'];
 
+		if (isset($_REQUEST['Id_utilisateur'])) {
+			$Id_utilisateur = htmlspecialchars($_REQUEST['Id_utilisateur']);
+		}
+
 		$titre = htmlspecialchars($_REQUEST['titre']);
 		$date = htmlspecialchars($_REQUEST['date']);
 		$first = htmlspecialchars($_REQUEST['first']);
@@ -121,8 +125,8 @@
 				$Date_debut = date('Y-m-d H:i', strtotime("$date $first"));
 				$Date_fin = date('Y-m-d H:i', strtotime("$date $last"));
 
-				$UpdateDate = $bdd->prepare('UPDATE evenement SET Titre = ?, Description = ?, Date_debut = ?, Date_fin = ? WHERE Id_evenement = ?');
-				$UpdateDate->execute(array($titre, $description, $Date_debut, $Date_fin, $Id_evenement));
+				$UpdateDate = $bdd->prepare('UPDATE evenement SET Titre = ?, Id_utilisateur = ?, Description = ?, Date_debut = ?, Date_fin = ? WHERE Id_evenement = ?');
+				$UpdateDate->execute(array($titre, $Id_utilisateur, $description, $Date_debut, $Date_fin, $Id_evenement));
 
 				$recupDate = $bdd->prepare('SELECT * FROM evenement WHERE Id_evenement = ? AND Matricule_personnel = ? AND Titre = ? AND Description = ? AND Date_debut = ?');
 				$recupDate->execute(array($Id_evenement, $Matricule_personnel, $titre, $description, $Date_debut));
