@@ -160,205 +160,216 @@
 
 
 	function inscription() {
-
-		$bdd = new PDO('mysql:host=localhost; dbname=gestion_de_stage; chaset=utf8;', 'root', '');
+		// Connexion à la base de données
+		try {
+			$bdd = new PDO('mysql:host=localhost;dbname=gestion_de_stage;charset=utf8;', 'root', '');
+			$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (Exception $e) {
+			die('Erreur : ' . $e->getMessage());
+		}
 
 		if (isset($_REQUEST['envoi'])) {
-
 			$Matricule_personnel = htmlspecialchars($_REQUEST['Matricule_personnel']);
 			$Login = htmlspecialchars($_REQUEST['Login']);
 			$Mot_de_passe2 = htmlspecialchars($_REQUEST['Mot_de_passe']);
 			$Mot_de_passe3 = htmlspecialchars($_REQUEST['Mot_de_passe1']);
 
-			if (!empty($_REQUEST['Matricule_personnel']) && !empty($_REQUEST['Login']) && !empty($_REQUEST['Mot_de_passe']) && !empty($_REQUEST['Mot_de_passe1'])) {
-				$Matricule_personnel = htmlspecialchars($_REQUEST['Matricule_personnel']);
-				$Login = htmlspecialchars($_REQUEST['Login']);
-				$Mot_de_passe = sha1($_REQUEST['Mot_de_passe']);
-				$Mot_de_passe1 = sha1($_REQUEST['Mot_de_passe1']);
+			// $sel = bin2hex(random_bytes(16)); // 16 octets donnent 32 caractères hexadécimaux
+			// // Hacher le mot de passe avec SHA-256 et le sel
+			// $Mot_de_passe_hash = hash('sha256', $sel . $Mot_de_passe2);
 
+			if (!empty($Matricule_personnel) && !empty($Login) && !empty($Mot_de_passe2) && !empty($Mot_de_passe3)) {
+				if (!is_numeric($Matricule_personnel)) {
+					// showMessage('Le matricule doit être un nombre!', $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+					?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Le matricule doit être un nombre!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: yellow">X</a></h4>								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					return;
+				}
+
+				if (!preg_match('/^[a-zA-Z0-9]+$/', $Login)) {
+					// showMessage('Le login doit être en lettres et/ou en chiffres!', $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+					
+					?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Le login doit être en lettres et/ou en chiffres!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: yellow">X</a></h4>								
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					return;
+				}
+
+				if ($Mot_de_passe2 !== $Mot_de_passe3) {
+					// showMessage('Les mots de passe ne sont pas identiques!', $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+					?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Les mots de passe ne sont pas identiques!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					return;
+				}
+
+				if (strlen($Mot_de_passe2) < 8 || !preg_match('/[A-Z]/', $Mot_de_passe2) || !preg_match('/[a-z]/', $Mot_de_passe2) || !preg_match('/[0-9]/', $Mot_de_passe2)) {
+					// showMessage('Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.', $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+					?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					return;
+				}
+
+				// $Mot_de_passe = password_hash($Mot_de_passe2, PASSWORD_BCRYPT);
+				$Mot_de_passe = sha1($_REQUEST['Mot_de_passe']);
 
 				$recupMatricule = $bdd->prepare('SELECT * FROM personnel WHERE Matricule_personnel = ?');
 				$recupMatricule->execute(array($Matricule_personnel));
 
-				if ($recupMatricule->rowCount() <= 0) { ?>
+				if ($recupMatricule->rowCount() <= 0) {
+					// showMessage("Ce matricule n'est pas enregistré!", $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+					?>
 					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
 					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
 						<div class="row py-3 justify-content-center">
 							<div class="col-md-7">
 								<div class="alert alert-warning">
 									<h1 class="py-3 text-center">Attention!</h1>
-									<h4 style="text-align: center;">Ce matricule n'est pas enregistré!<a href="inscription_form.php?Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 45px; color: brown">X</a></h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- <script>
-						alert('Cet identifiant est déja inscrit !');
-					</script> -->
-					<?php
-					require('MesFormulaires.php');
-					inscription_form();
-					//header('Location: inscription_form.php');
-				} else if (isnan($Matricule_personnel) == 'false') { ?>
-					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-						<div class="row py-3 justify-content-center">
-							<div class="col-md-7">
-								<div class="alert alert-warning">
-									<h1 class="py-3 text-center">Attention!</h1>
-									<h4 style="text-align: center;">Le matricule doit etre un nombre!<a href="inscription_form.php?Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>
-								</div>
+									<h4 style="text-align: center;">Ce matricule n'est pas enregistré!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>								</div>
 							</div>
 						</div>
 					</div>
 					<?php
-				} else if (loginValid($Login) == 'false') {?>
-					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-						<div class="row py-3 justify-content-center">
-							<div class="col-md-7">
-								<div class="alert alert-warning">
-									<h1 class="py-3 text-center">Attention!</h1>
-									<h4 style="text-align: center;">Le login doit être en lettre ou/et en chiffre!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 45px; color: brown">X</a></h4>
-								</div>
-							</div>
-						</div>
-					</div>
-					<?php
-					
 				} else {
+					$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ?');
+					$recupLogin->execute(array($Login));
 
-					if ($Mot_de_passe == $Mot_de_passe1) {
+					$recupId_employe = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ?');
+					$recupId_employe->execute(array($Matricule_personnel));
 
-						$recupLogin = $bdd->prepare('SELECT * FROM utilisateur WHERE Login = ?');
-						$recupLogin->execute(array($Login));
-						
-						$recupId_employe = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ?');
-						$recupId_employe->execute(array($Matricule_personnel));
-
-						if ($recupId_employe->rowCount() > 0) { ?>
-							<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-							<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-								<div class="row py-3 justify-content-center">
-									<div class="col-md-7">
-										<div class="alert alert-danger">
-											<h1 class="py-3 text-center">Erreur !</h1>
-											<h4 style="text-align: center;">Cet identifiant existe déja !<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- <script>
-								alert('Cet identifiant est déja inscrit !');
-							</script> -->
-							<?php
-							require('MesFormulaires.php');
-							inscription_form();
-							//header('Location: inscription_form.php');
-						} else if ($recupLogin->rowCount() > 0) { ?>
-							<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-							<script src="bootstrap/js/bootstrap_min.js"></script>
-							<script src="bootstrap/js/jquery.js"></script>
-							<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-								<div class="row py-3 justify-content-center">
-									<div class="col-md-7">
-										<div class="alert alert-danger">
-											<h1 class="py-3 text-center">Erreur !</h1>
-											<h4 style="text-align: center;">Ce pseudonyme existe déja !<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- <script>
-								alert('Ce pseudonyme existe déja !');
-							</script> -->
-							<?php
-							require('MesFormulaires.php');
-							inscription_form();
-
-						} else {
-							$insertUser = $bdd->prepare('INSERT INTO utilisateur (Matricule_personnel, Login, Role, Mot_de_passe) VALUES (?,?,?,?)');
-							$insertUser->execute(array($Matricule_personnel, $Login, "user", $Mot_de_passe));
-
-							$recupUser = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ? AND Login = ? AND Mot_de_passe = ?');
-							$recupUser->execute(array($Matricule_personnel, $Login, $Mot_de_passe));
-
-							if ($recupUser->rowCount() > 0) {
-
-								session_start();
-								$_SESSION['Matricule_personnel'] = $Matricule_personnel;	
-								$_SESSION['Login'] = $Login;
-								$_SESSION['Mot_de_passe'] = $Mot_de_passe;
-								$_SESSION['Id_utilisateur'] = $recupUser->fetch()['Id_utilisateur']; /* Recuperer uniquement l'id parmis les éléments du "fetch"*/
-
-								?>
-								<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-								<script src="bootstrap/js/bootstrap_min.js"></script>
-								<script src="bootstrap/js/jquery.js"></script>
-								<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-									<div class="row py-3 justify-content-center">
-										<div class="col-md-7">
-											<div class="alert alert-success">
-												<h1 class="py-3 text-center">Succès !</h1>
-												<h4 style="text-align: center;">Vos informations ont bien été enregistrées !<a href="connexion_form.php?Login=<?=$Login;?>" style="position: relative; left: 45px; color: green">X</a></h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<?php
-								
-								//header('Location: connexion_form.php');
-							}
-						}
-					} else { ?>
-						<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-						<script src="bootstrap/js/bootstrap_min.js"></script>
-						<script src="bootstrap/js/jquery.js"></script>
-						<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-							<div class="row py-3 justify-content-center">
-								<div class="col-md-7">
-									<div class="alert alert-warning">
-										<h1 class="py-3 text-center">Attention !</h1>
-										<h4 style="text-align: center;">Veillez renseigner des mots de passe identiques !<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>" style="position: relative; left: 45px; color: brown">X</a></h4>
-									</div>
-								</div>
+					if ($recupId_employe->rowCount() > 0) {
+						// showMessage("Cet identifiant existe déjà!", $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+						?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Cet identifiant existe déjà!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>								</div>
 							</div>
 						</div>
-						<!-- <script>
-							alert('Veillez renseigner des mots de passe identiques !')
-						</script> -->
-						<?php
-						require('MesFormulaires.php');
-						inscription_form();
+					</div>
+					<?php
+					} elseif ($recupLogin->rowCount() > 0) {
+						// showMessage("Ce pseudonyme existe déjà!", $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+						?>
+					<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+					<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+						<div class="row py-3 justify-content-center">
+							<div class="col-md-7">
+								<div class="alert alert-warning">
+									<h1 class="py-3 text-center">Attention!</h1>
+									<h4 style="text-align: center;">Ce pseudonyme existe déjà!<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>&Mot_de_passe=<?=$Mot_de_passe2;?>&Mot_de_passe1=<?=$Mot_de_passe3;?>" style="position: relative; left: 55px; color: brown">X</a></h4>								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					} else {
+						$insertUser = $bdd->prepare('INSERT INTO utilisateur (Matricule_personnel, Login, Role, Mot_de_passe) VALUES (?, ?, ?, ?)');
+						$insertUser->execute(array($Matricule_personnel, $Login, "user", $Mot_de_passe));
+
+						$recupUser = $bdd->prepare('SELECT * FROM utilisateur WHERE Matricule_personnel = ? AND Login = ?');
+						$recupUser->execute(array($Matricule_personnel, $Login));
+
+						if ($recupUser->rowCount() > 0) {
+							session_start();
+							$user = $recupUser->fetch();
+							$_SESSION['Matricule_personnel'] = $Matricule_personnel;
+							$_SESSION['Login'] = $Login;
+							$_SESSION['Id_utilisateur'] = $user['Id_utilisateur'];
+
+							// showMessage("Vos informations ont bien été enregistrées!", $Login);
+
+							?>
+							<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+							<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+								<div class="row py-3 justify-content-center">
+									<div class="col-md-7">
+										<div class="alert alert-success">
+											<h1 class="py-3 text-center">Réussi!</h1>
+											<h4 style="text-align: center;">Vos informations ont bien été enregistrées !<a href="connexion_form.php?Login=<?=$Login;?>" style="position: relative; left: 45px; color: green">X</a></h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php
+						}
 					}
 				}
-
-				
-
-				
-			}else { ?>
-				<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
-				<script src="bootstrap/js/bootstrap_min.js"></script>
-				<script src="bootstrap/js/jquery.js"></script>
-				<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
-					<div class="row py-3 justify-content-center">
-						<div class="col-md-7">
-							<div class="alert alert-danger">
-								<h1 class="py-3 text-center">Erreur !</h1>
-								<h4 style="text-align: center;">Veillez compléter tous les champs !<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>" style="position: relative; left: 55px; color: brown">X</a></h4>
+			} else {
+				// showMessage("Veuillez compléter tous les champs!", $Login, $Mot_de_passe2, $Mot_de_passe3, $Matricule_personnel);
+			
+				?>
+							<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+							<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+								<div class="row py-3 justify-content-center">
+									<div class="col-md-7">
+										<div class="alert alert-warning">
+											<h1 class="py-3 text-center">Attention!</h1>
+											<h4 style="text-align: center;">Veillez compléter tous les champs !<a href="inscription_form.php?Matricule_personnel=<?=$Matricule_personnel;?>&Login=<?=$Login;?>" style="position: relative; left: 55px; color: yellow">X</a></h4>										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<!-- <script>
-					alert('Veillez compléter tous les champs !')
-				</script> -->
-				<?php
-				require('MesFormulaires.php');
-				inscription_form();
+							<?php
+
 			}
 		}
-		
+	}
+
+	function showMessage($message, $login = '', $password = '', $password1 = '', $matricule = '') {
+		?>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap_min.css">
+		<div class="container" style="position: absolute; z-index: 3; width: 100%; left: 100px;">
+			<div class="row py-3 justify-content-center">
+				<div class="col-md-7">
+					<div class="alert alert-warning">
+						<h1 class="py-3 text-center">Attention!</h1>
+						<h4 style="text-align: center;"><?= htmlspecialchars($message); ?><a href="inscription=_form.php?Matricule_personnel=<?= htmlspecialchars($matricule); ?>&Login=<?= htmlspecialchars($login); ?>&Mot_de_passe=<?= htmlspecialchars($password); ?>&Mot_de_passe1=<?= htmlspecialchars($password1); ?>" style="position: relative; left: 45px; color: brown">X</a></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
 	}
 	
 
